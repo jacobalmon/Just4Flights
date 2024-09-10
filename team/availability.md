@@ -11,3 +11,9 @@
 **Fridays:** after 3pm
 
 **Weekends:** all day
+
+# Melissa Mendez
+
+# Kyle Cabrera
+
+# Max Gulart
