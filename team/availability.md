@@ -13,6 +13,15 @@
 **Weekends:** all day
 
 # Melissa Mendez
+**Mondays:** after 6:45pm
+
+**Tuesdays:** after 5:00pm
+
+**Wednesdays:** after 6:45pm
+
+**Thursdays:** after 4:00pm
+
+**Fridays:** after 3pm
 
 # Kyle Cabrera
 
