@@ -23,7 +23,7 @@
 
 **Fridays:** after 3pm
 
-**Weekends:** all day
+**Weekends:** Some weekends (like Kyle)
 
 # Kyle Cabrera
 
