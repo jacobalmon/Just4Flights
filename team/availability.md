@@ -27,4 +27,16 @@
 
 # Kyle Cabrera
 
+**Mondays:** after 5:00pm
+
+**Tuesdays:** after 5:00pm
+
+**Wednesdays:** after 5:00pm
+
+**Thursdays:** after 5:00pm
+
+**Fridays:** NOT AVAILABLE
+
+**Weekends:** Some weekends
+
 # Max Gulart
