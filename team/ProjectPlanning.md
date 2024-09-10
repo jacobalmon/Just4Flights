@@ -11,4 +11,4 @@
 **Applications/Programming Languages to be used**
 - Java for the main content
 - JavaFX for the UI
-- JDBCthat uses SQL for the database of users
+- JDBC that uses SQL for the database of users
