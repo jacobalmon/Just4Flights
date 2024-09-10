@@ -23,6 +23,8 @@
 
 **Fridays:** after 3pm
 
+**Weekends:** all day
+
 # Kyle Cabrera
 
 # Max Gulart
