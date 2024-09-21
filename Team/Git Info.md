@@ -1,2 +1,1 @@
-# How to Use Version Control with Git and GitHub
-
+# How to Use Version Control via Git
