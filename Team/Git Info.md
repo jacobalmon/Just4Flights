@@ -47,4 +47,4 @@
 
 If you have questions let me know. - Jacob
 
-I would like to have a meeting sometime after the Proposal to get y'all familiar.
+I would like to have a meeting sometime after the Proposal to get y'all familiar with git.
