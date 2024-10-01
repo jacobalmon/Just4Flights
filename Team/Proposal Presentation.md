@@ -8,7 +8,7 @@
    - Melissa
 
 **5. Timeline**
-   - Kyle, Jump in if needed - All of Us
+   - Max
 
 **6. Project Overview**
    - 6.1 to 6.3 - Max
