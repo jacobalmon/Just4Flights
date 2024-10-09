@@ -6,7 +6,7 @@ import java.sql.*;
 
 public class Server {
 	private static final String DB_CLASSNAME = "com.mysql.cj.jdbc.Driver";
-	private static final String CONNECTION = "jdbc:mysql://127.0.0.1/sys";
+	private static final String CONNECTION = "jdbc:mysql://127.0.0.1/just4flights";
 	private static final String USER = "root";
 	private static final String PASSWORD = "cloudcrew123";
 	
