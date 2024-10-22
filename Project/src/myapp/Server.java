@@ -39,10 +39,17 @@ public class Server {
 			 PrintWriter out = new PrintWriter (clientSocket.getOutputStream(), true)) {
 				
 			// Read SQL Query from Client.
-			String query = in.readLine();
-			String result = executeQuery(query);
-			out.println(result);
-			
+			String username = in.readLine();
+		    String password = in.readLine();
+		    
+		    boolean isAuthenticated = UserAuthenication.authenicateUser(username, password);
+		    
+		    if (isAuthenticated) {
+	            out.println("Authentication Successful");
+	        } else {
+	            out.println("Authentication Failed");
+	        }
+		    
 		} catch (IOException e) {
 			e.getMessage();
 			e.printStackTrace();
