@@ -29,46 +29,59 @@ public class Server {
 				e.printStackTrace();
 			}
 			
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+		    } catch (ClassNotFoundException e) {
+		    	e.printStackTrace();
+		    }
 		}
-	}
 	
 	private static void handleClient(Socket clientSocket) {
-		try (BufferedReader in = new BufferedReader (new InputStreamReader(clientSocket.getInputStream()));
-			 PrintWriter out = new PrintWriter (clientSocket.getOutputStream(), true)) {
-				
-			// Read SQL Query from Client.
-			String username = in.readLine();
-		    String password = in.readLine();
-		    
-		    boolean isAuthenticated = UserAuthenication.authenicateUser(username, password);
-		    
-		    if (isAuthenticated) {
-	            out.println("Authentication Successful");
-	        } else {
-	            out.println("Authentication Failed");
+	    try (BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+	         PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true)) {
+	         
+	    	// Receive the Request Type from the Client.
+	        String requestType = in.readLine();
+	        
+	        // Receiving Information from the Server.
+	        if ("REGISTER".equalsIgnoreCase(requestType)) {
+	            String username = in.readLine();
+	            String password = in.readLine();
+	            
+	            // Register User
+	            UserAuthentication.registerUser(username, password);
+	            out.println("User Registered");
+	            
+	        // Receiving Information from the Server.
+	        } else if ("AUTHENTICATE".equalsIgnoreCase(requestType)) {
+	            String username = in.readLine();
+	            String password = in.readLine();
+	            
+	            boolean isAuthenticated = UserAuthentication.authenticateUser(username, password);
+	            out.println(isAuthenticated ? "Authentication Successful" : "Authentication Failed");
 	        }
-		    
-		} catch (IOException e) {
-			e.getMessage();
-			e.printStackTrace();
-		} finally {
-			try {
-				clientSocket.close();
-			} catch (IOException e) {
-				e.getMessage();
-			}
-		}
+
+	    } catch (SocketTimeoutException e) {
+	        System.err.println("Client request timed out: " + e.getMessage());
+	    } catch (IOException e) {
+	        System.err.println("Client communication error: " + e.getMessage());
+	    } finally {
+	        try {
+	            clientSocket.close();
+	        } catch (IOException e) {
+	            System.err.println("Error closing client socket: " + e.getMessage());
+	        }
+	    }
 	}
+
 		
 	private static String executeQuery(String query) {
+		// Stores Result of the Query.
 		StringBuilder result = new StringBuilder();
 			
 		try (Connection connection = DriverManager.getConnection(CONNECTION, USER, PASSWORD);
 			 Statement statement = connection.createStatement();
 			 ResultSet resultSet = statement.executeQuery(query)) {
 				
+			// Get Meta Data from Result Set for Columns.
 			ResultSetMetaData metaData = resultSet.getMetaData();
 			int columns = metaData.getColumnCount();
 			
