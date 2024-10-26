@@ -42,22 +42,24 @@ public class Server {
 	        String requestType = in.readLine();
 	        
 	        // Receiving Information from the Server.
-	        if ("REGISTER".equalsIgnoreCase(requestType)) {
-	            String username = in.readLine();
-	            String password = in.readLine();
+	        if (requestType.startsWith("REGISTER")) {
+	        	String[] creds = requestType.split(" ");
+	            String username = creds[1];
+	            String password = creds[2];
 	            
 	            // Register User
 	            UserAuthentication.registerUser(username, password);
 	            out.println("User Registered");
 	            
 	        // Receiving Information from the Server.
-	        } else if ("AUTHENTICATE".equalsIgnoreCase(requestType)) {
-	            String username = in.readLine();
-	            String password = in.readLine();
+	        } else if (requestType.startsWith("AUTHENTICATE")) {
+	        	String[] creds = requestType.split(" ");
+	        	String username = creds[1];
+	        	String password = creds[2];
 	            
 	            boolean isAuthenticated = UserAuthentication.authenticateUser(username, password);
 	            out.println(isAuthenticated ? "Authentication Successful" : "Authentication Failed");
-	        }
+	        } 
 
 	    } catch (SocketTimeoutException e) {
 	        System.err.println("Client request timed out: " + e.getMessage());
