@@ -78,11 +78,11 @@ public class Client extends Application {
 		emailText.setPromptText("Email");
 		
 		// Textbox for Password.
-		TextField passwordText = new TextField();
+		PasswordField passwordText = new PasswordField();
 		passwordText.setPromptText("Password");
 		
 		// Textbox for Confirm Password.
-		TextField confirmPasswordText = new TextField();
+		PasswordField confirmPasswordText = new PasswordField();
 		confirmPasswordText.setPromptText("Confirm Password");
 		
 		// Button for Create Account.
@@ -101,7 +101,11 @@ public class Client extends Application {
 				statusLabel.setText("Passwords Don't Match");
 			} else {
 				String response = sendRegisterRequest(firstname, lastname, email, password);
-				statusLabel.setText(response);
+				if (response.equals("User Registered")) {
+					showLoginPage();
+				} else {
+					statusLabel.setText(response);
+				}
 			}
 		});
 		
