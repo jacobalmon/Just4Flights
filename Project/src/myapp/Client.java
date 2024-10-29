@@ -19,17 +19,19 @@ public class Client extends Application {
 	}
 	
 	private void showLoginPage() {
-		// Add UI Code Here...
-		
+		// Textbox for Username.
 		TextField usernameField = new TextField();
 		usernameField.setPromptText("Username");
 		
+		// Textbox for Password.
 		PasswordField passwordField = new PasswordField();
 		passwordField.setPromptText("Password");
 		
+		// Login Button.
 		Button loginButton = new Button("Login");
 		Label statusLabel = new Label();
 		
+		// Login Button Event Listener.
 		loginButton.setOnAction(e -> {
 			String username = usernameField.getText();
 			String password = passwordField.getText();
@@ -44,12 +46,18 @@ public class Client extends Application {
 			}
 		});
 		
+		// Screen for Login Page.
 		VBox layout = new VBox(10, usernameField, passwordField, loginButton, statusLabel);
 		Scene loginScene = new Scene(layout, 300, 200);
 		
+		// Show Login Page.
 		primary.setScene(loginScene);
 		primary.setTitle("Login Page");
 		primary.show();
+	}
+	
+	private void showRegisterPage() {
+		// TBA.
 	}
 	
 	private boolean sendLoginRequest(String username, String password) {
@@ -57,7 +65,9 @@ public class Client extends Application {
 			 PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 			 BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
 			
+			// Send Authentication Request to the Server.
 			out.println("AUTHENTICATE " + username + " " + password);
+			// Receive Response from the Client.
 			String response = in.readLine();
 			return "Authentication Successful".equals(response);
 		} catch (IOException e) {
@@ -67,53 +77,6 @@ public class Client extends Application {
 	}
 	
 	public static void main(String[] args) {
-		launch(args);
+		launch(args); // runs app.
 	}
-	
-//	public static void main(String[] args) {
-//		try (Socket socket = new Socket(SERVER_ADDRESS, SERVER_PORT);
-//			 BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-//			 PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-//			 BufferedReader consoleInput = new BufferedReader(new InputStreamReader(System.in))) {
-//			
-//			while (true) {
-//				// Read the Type of Request.
-//				String request = consoleInput.readLine();
-//				
-//				// Checking if it's a Register Request.
-//				if ("register".equals(request)) {
-//					out.println("REGISTER");
-//					
-//					// Reading Username & Sending to Server.
-//					String username = consoleInput.readLine();
-//					out.println(username);
-//					
-//					// Reading Password & Sending to Server.
-//					String password = consoleInput.readLine();
-//					out.println(password);
-//					
-//					// Receiving Server's Response.
-//					String response = in.readLine();
-//					System.out.println(response);
-//				// Checking if it's a Authenticate Request.
-//				} else if("authenticate".equals(request)) {
-//					out.println("AUTHENTICATE");
-//					
-//					String username = consoleInput.readLine();
-//					out.println(username);
-//					
-//					String password = consoleInput.readLine();
-//					out.println(password);
-//					
-//					String response = in.readLine();
-//					System.out.println(response);
-//				// Throw an Error for now.
-//				} else {
-//					System.out.println("ERROR");
-//				}
-//			}	
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//	}
 }
