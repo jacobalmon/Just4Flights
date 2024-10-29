@@ -97,7 +97,7 @@ public class Client extends Application {
 		});
 		
 		// Screen for Creating a new Account.
-		VBox layout = new VBox(10, firstName, lastName, username, email, password, confirmPassword, createAccount);
+		VBox layout = new VBox(10, firstNameText, lastNameText, usernameText, emailText, passwordText, confirmPasswordText, createAccountButton);
 		Scene registerScene = new Scene(layout, 300, 200);
 		
 		primary.setScene(registerScene);
