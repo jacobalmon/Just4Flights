@@ -44,12 +44,14 @@ public class Server {
 	        // Receiving Information from the Server.
 	        if (requestType.startsWith("REGISTER")) {
 	        	String[] creds = requestType.split(" ");
-	            String username = creds[1];
-	            String password = creds[2];
+	            String firstName = creds[1];
+	            String lastName = creds[2];
+	            String email = creds[3];
+	            String password = creds[4];
 	            
-	            // Register User
-	            UserAuthentication.registerUser(username, password);
-	            out.println("User Registered");
+	            // Register User.
+	            String response = UserAuthentication.registerUser(firstName, lastName, email, password);
+	            out.println(response);
 	            
 	        // Receiving Information from the Server.
 	        } else if (requestType.startsWith("AUTHENTICATE")) {
@@ -57,6 +59,7 @@ public class Server {
 	        	String username = creds[1];
 	        	String password = creds[2];
 	            
+	        	// Authenticate User.
 	            boolean isAuthenticated = UserAuthentication.authenticateUser(username, password);
 	            out.println(isAuthenticated ? "Authentication Successful" : "Authentication Failed");
 	        } 

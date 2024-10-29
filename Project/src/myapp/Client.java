@@ -73,10 +73,6 @@ public class Client extends Application {
 		TextField lastNameText = new TextField();
 		lastNameText.setPromptText("Last Name");
 		
-		// Textbox for Username.
-		TextField usernameText = new TextField();
-		usernameText.setPromptText("Username");
-		
 		// Textbox for Email.
 		TextField emailText = new TextField();
 		emailText.setPromptText("Email");
@@ -91,19 +87,32 @@ public class Client extends Application {
 		
 		// Button for Create Account.
 		Button createAccountButton = new Button("Create Account");
+		Label statusLabel = new Label();
 		
+		// Create Account Event Listener.
 		createAccountButton.setOnAction(e -> {
+			String firstname = firstNameText.getText();
+			String lastname = lastNameText.getText();
+			String email = emailText.getText();
+			String password = passwordText.getText();
+			String confirmPassword = confirmPasswordText.getText();
 			
+			if (!password.equals(confirmPassword)) {
+				statusLabel.setText("Passwords Don't Match");
+			} else {
+				String response = sendRegisterRequest(firstname, lastname, email, password);
+				statusLabel.setText(response);
+			}
 		});
 		
 		// Screen for Creating a new Account.
-		VBox layout = new VBox(10, firstNameText, lastNameText, usernameText, emailText, passwordText, confirmPasswordText, createAccountButton);
+		VBox layout = new VBox(10, firstNameText, lastNameText, emailText, passwordText, confirmPasswordText, createAccountButton, statusLabel);
 		Scene registerScene = new Scene(layout, 300, 200);
 		
+		// Show Register Page.
 		primary.setScene(registerScene);
 		primary.setTitle("Create New Account");
 		primary.show();
-		
 	}
 	
 	private boolean sendLoginRequest(String username, String password) {
@@ -119,6 +128,22 @@ public class Client extends Application {
 		} catch (IOException e) {
 			e.printStackTrace();
 			return false;
+		}
+	}
+	
+	private String sendRegisterRequest(String firstname, String lastname, String email, String password) {
+		try (Socket socket = new Socket(SERVER_ADDRESS, SERVER_PORT);
+				 PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+				 BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
+			
+			// Send Registration Request to the Server.
+			out.println("REGISTER " + firstname + " " + lastname + " " + email + " " + password);
+			// Receive Response from the Client.s
+			String response = in.readLine();
+			return response;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return "Invalid Credentials";
 		}
 	}
 	

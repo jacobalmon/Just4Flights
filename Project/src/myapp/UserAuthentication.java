@@ -61,25 +61,52 @@ public class UserAuthentication {
 		}
 	}
 	
-	public static void registerUser(String username, String password) {
+	public static String registerUser(String firstname, String lastname, String username, String password) {
+		
+		if (userExists(username)) {
+			return "Username/Email Already Exists";
+		}
 		// Hash the Input Password.
 		String hashedPassword = hashPassword(password);
 		// Query for Registering a User.
-		String query = "INSERT INTO users (username, password) VALUES (?,?)";
+		String query = "INSERT INTO users (first_name, last_name, username, password) VALUES (?,?,?,?)";
 		
 		try (Connection connection = DriverManager.getConnection(CONNECTION, USER, PASSWORD);
 			 PreparedStatement statement = connection.prepareStatement(query)) {
 			
-				 // Set Username & Password in Statement.
-				 statement.setString(1, username);
-				 statement.setString(2, hashedPassword);
+				 // Set First Name, Last Name, Username & Password in Statement.
+				 statement.setString(1, firstname);
+				 statement.setString(2, lastname);
+				 statement.setString(3, username);
+				 statement.setString(4, hashedPassword);
 				 // Execute the Query.
 				 statement.executeUpdate(); 
-				 
+				 return "User Registered";
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return "Registration Failed";
+		} 
+	}
+		
+	private static boolean userExists(String username) {
+		// Query to Check if Username Exists in Database.
+		String query = "SELECT COUNT(*) FROM users WHERE username = ?";
+		
+		try (Connection connection = DriverManager.getConnection(CONNECTION, USER, PASSWORD);
+		         PreparedStatement statement = connection.prepareStatement(query)) {
+			
+			// Execute Query.
+			statement.setString(1, username);
+			ResultSet resultSet = statement.executeQuery();
+			
+			// Return if it Exists or Not.
+			if (resultSet.next()) {
+				return resultSet.getInt(1) > 0;
+			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return false;
 	}
-		
-	
 }
