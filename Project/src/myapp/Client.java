@@ -15,7 +15,7 @@ public class Client extends Application {
 	
 	public void start(Stage primary) {
 		this.primary = primary;
-		showLoginPage(); // Start with Login Page for now.
+		showLoginPage(); // Start with Login Page.
 	}
 	
 	private void showLoginPage() {
@@ -43,7 +43,7 @@ public class Client extends Application {
 			
 			if (isAuthenticated) {
 				statusLabel.setText("Login Successful.");
-				// Go to Home Page...
+				showHomePage();
 			} else {
 				statusLabel.setText("Invalid Username or Password");
 			}
@@ -117,6 +117,10 @@ public class Client extends Application {
 		primary.setScene(registerScene);
 		primary.setTitle("Create New Account");
 		primary.show();
+	}
+	
+	private void showHomePage() {
+		
 	}
 	
 	private boolean sendLoginRequest(String username, String password) {
