@@ -123,7 +123,7 @@ public class Client extends Application {
 		
 	}
 	
-	private boolean sendLoginRequest(String username, String password) {
+	public boolean sendLoginRequest(String username, String password) {
 		try (Socket socket = new Socket(SERVER_ADDRESS, SERVER_PORT);
 			 PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 			 BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
@@ -139,7 +139,7 @@ public class Client extends Application {
 		}
 	}
 	
-	private String sendRegisterRequest(String firstname, String lastname, String email, String password) {
+	public String sendRegisterRequest(String firstname, String lastname, String email, String password) {
 		try (Socket socket = new Socket(SERVER_ADDRESS, SERVER_PORT);
 				 PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 				 BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
