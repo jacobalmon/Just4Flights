@@ -19,6 +19,7 @@ public class Client extends Application {
 	}
 	
 	private void showLoginPage() {
+		
 		// Textbox for Username.
 		TextField usernameField = new TextField();
 		usernameField.setPromptText("Username");
@@ -36,17 +37,23 @@ public class Client extends Application {
 		
 		// Login Button Event Listener.
 		loginButton.setOnAction(e -> {
+			statusLabel.setText("");
+			
 			String username = usernameField.getText();
 			String password = passwordField.getText();
 			
-			boolean isAuthenticated = sendLoginRequest(username, password);
-			
-			if (isAuthenticated) {
-				statusLabel.setText("Login Successful.");
-				showHomePage();
-			} else {
-				statusLabel.setText("Invalid Username or Password");
-			}
+			 if (username.isEmpty() || password.isEmpty()) {
+				 statusLabel.setText("Username and Password cannot be empty.");
+			 } else {
+			     boolean isAuthenticated = sendLoginRequest(username, password);
+			        
+			     if (isAuthenticated) {
+			    	 statusLabel.setText("Login Successful.");
+			         showHomePage();
+			     } else {
+			         statusLabel.setText("Invalid Username or Password");
+			     }
+			 }
 		});
 		
 		// Register Button Event Listener.
@@ -99,6 +106,8 @@ public class Client extends Application {
 			
 			if (!password.equals(confirmPassword)) {
 				statusLabel.setText("Passwords Don't Match");
+			} else if (firstname.isEmpty() || lastname.isEmpty() || email.isEmpty() || password.isEmpty()) {
+				statusLabel.setText("Fill all Fields");
 			} else {
 				String response = sendRegisterRequest(firstname, lastname, email, password);
 				if (response.equals("User Registered")) {
