@@ -78,7 +78,7 @@ public class Server {
 	}
 
 		
-	private static String executeQuery(String query) {
+	public static String executeQuery(String query) {
 		// Stores Result of the Query.
 		StringBuilder result = new StringBuilder();
 			
