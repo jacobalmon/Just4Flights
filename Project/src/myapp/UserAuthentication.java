@@ -109,4 +109,18 @@ public class UserAuthentication {
 		}
 		return false;
 	}
+	
+	public static String deleteUserByUsername(String username) {
+		try (Connection conn = DriverManager.getConnection(CONNECTION, USER, PASSWORD);
+			 PreparedStatement pstmt = conn.prepareStatement("DELETE FROM users WHERE username = ?")) {
+			
+			pstmt.setString(1, username);
+			int rowsAffected = pstmt.executeUpdate();
+			return (rowsAffected > 0) ? "User Deleted" : "User Not Found";
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return "Error Deleting User";
+		}
+	}
 }
