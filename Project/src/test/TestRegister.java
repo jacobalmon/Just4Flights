@@ -1,6 +1,9 @@
-package myapp;
+package test;
 
 import org.junit.jupiter.api.Test;
+
+import myapp.UserAuthentication;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.Connection;
@@ -31,5 +34,7 @@ class TestRegister {
 		String response = UserAuthentication.registerUser(firstname, lastname, email, password);
 		
 		assertEquals(response, "User Registered", "New User");
+		
+		UserAuthentication.deleteUserByUsername(email);
 	}
 }
