@@ -24,7 +24,7 @@ public class Client extends Application {
 	
 	private void showLoginPage() {
 		
-		// Main container for the image and login form
+		// Main container for the image and login form.
 //		HBox rootContainer = new HBox();
 //		rootContainer.setAlignment(Pos.CENTER);
 //		rootContainer.setSpacing(50); // Spacing for image and login form
