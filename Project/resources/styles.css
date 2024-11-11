@@ -1,0 +1,142 @@
+/* Main container styling for the login page */
+#loginPane {
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 20px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);
+    -fx-alignment: center;
+    -fx-spacing: 10px; /* Space between elements */
+}
+
+/* Styling for input fields */
+.text-field, .password-field {
+    -fx-background-color: #E5E5E5;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 10px;
+    -fx-font-size: 14px;
+    -fx-prompt-text-fill: #888888;
+    -fx-border-color: transparent;
+    -fx-pref-width: 200px;
+}
+
+/* Styling for the Welcome label */
+.welcome-label {
+    -fx-font-family: "SansSerif";
+	-fx-font-weight: Bold;
+    -fx-font-size: 24px;
+    -fx-text-fill: #333333;
+    -fx-padding: 10px 0 20px 0; /* Adds spacing below the text */
+}
+
+/* Button styling */
+.button {
+    -fx-background-color: #FF7F7F;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 14px;             /* Adjust font size for better fit */
+    -fx-font-family: "Arial Black";
+    -fx-padding: 10px;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+    -fx-pref-width: 200px;
+    -fx-wrap-text: true;             /* Enable text wrapping */
+    -fx-text-alignment: center;      /* Center-align the text */
+}
+
+.button:hover {
+    -fx-background-color: #FF6B6B; /* Slightly darker coral on hover */
+}
+
+/* Status label styling */
+#statusLabel {
+    -fx-text-fill: #FF0000; /* Red color for error messages */
+    -fx-font-size: 12px;
+}
+
+/* Styling for the card container */
+#cardContainer {
+    -fx-background-color: #FFFFFF; /* White background for the card */
+    -fx-padding: 20px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0); /* Shadow effect */
+    -fx-alignment: center;
+    -fx-spacing: 15px; /* Space between elements inside the card */
+}
+
+.or-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #555555;
+    -fx-padding: 0 10px; /* Adds a bit of padding */
+}
+
+/* Styling for separators */
+.separator {
+    -fx-background-color: #CCCCCC; /* Light gray color */
+    -fx-border-width: 1px;         /* Thickness of the line */
+    -fx-pref-height: 1px;          /* Sets height to make it look like a line */
+}
+
+/* Main container styling */
+.main-container {
+    -fx-alignment: center;
+    -fx-padding: 50;
+}
+
+/* Card container styling */
+.card-container {
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 40;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);
+    -fx-spacing: 20;
+}
+
+/* Title label styling */
+#title-label {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-padding: 10;
+}
+
+/* Text field styling */
+.text-field {
+    -fx-background-color: #f0f0f0;
+    -fx-padding: 8px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+	-fx-pref-width: 300px; /* Set consistent width to align with name fields */
+}
+
+/* Styling for the Create Account button */
+#create-account-button {
+    -fx-background-color: #FF7F7F;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 16px;
+    -fx-padding: 10px 20px;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+    -fx-cursor: hand; /* Change cursor to hand pointer */
+    -fx-transition: all 0.2s ease-in-out; /* Smooth transition for the hover effect */
+}
+
+/* Hover effect: Change background color and slightly expand */
+#create-account-button:hover {
+    -fx-background-color: #FF6B6B; /* Darker shade for highlight */
+}
+
+/* Status label styling */
+#status-label {
+    -fx-text-fill: red;
+    -fx-font-size: 12px;
+    -fx-padding: 5;
+}
+
+/* Container styling for HBoxes */
+.name-container, .password-container {
+    -fx-alignment: center;
+    -fx-spacing: 10;
+}
