@@ -1,4 +1,4 @@
-# How to Use Version Control via Git
+# How to Get Git to work in Eclipse.
 
 **Install Git In Eclipse**
 
@@ -29,22 +29,3 @@
 - Now enter the token link as the password. (Protocol: https)
 - Choose branches you want to clone and clock Next.
 - Import Project as General (3rd Option).
-
-**Pushing Changes to GitHub**
-- In the terminal go to the directory of the cloned repo.
-- Make changes to whatever is needed.
-- Enter _git add ._
-- This will update the log of changes made.
-- Enter _git commit -m "<insert message\>"_
-- Create a comment of what you did to the code.
-- Enter _git push origin <branch_name>_
-- This will push the changes into GitHub for everyone to see.
-
-**Updating Your Local Repository**
-- In the terminal go to the directory of the cloned repo.
-- Enter _git pull origin <branch_name>_
-- This will pull the changes and update your repo.
-
-If you have questions let me know. - Jacob
-
-I would like to have a meeting sometime after the Proposal to get y'all familiar with git.
