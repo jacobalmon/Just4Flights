@@ -9,10 +9,14 @@
 - Always select a new branch for each feature or fix.
 - git checkout <your_branch>
 
-# 3. Pull from Repo under Selected Branch
+# 3. Updating Branch with Main Branch
 
 - To pull changes from github do:
-- git pull
+- git fetch origin main
+- git rebase origin/main
+- If there git rebase doesn't work, then do:
+- git stash
+- git rebase origin/main
 
 # 4. Contribute to your Branch
 
