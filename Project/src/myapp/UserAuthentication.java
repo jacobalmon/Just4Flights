@@ -5,6 +5,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class UserAuthentication {
+	// Database Credentials.
 	private static final String CONNECTION = "jdbc:mysql://127.0.0.1/just4flights";
 	private static final String USER = "root";
 	private static final String PASSWORD = "cloudcrew123";
