@@ -271,6 +271,10 @@ public class Client extends Application {
 		}
 	}
 	
+	private void searchFlights(String src, String dst, int numAdults, int numChildren, int numInfants, String flightType) {
+		
+	}
+	
 	public static void main(String[] args) {
 		launch(args); // runs app.
 	}
