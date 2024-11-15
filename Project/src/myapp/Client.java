@@ -2,6 +2,9 @@ package myapp;
 
 import java.io.*;
 import java.net.*;
+
+import com.mashape.unirest.http.exceptions.UnirestException;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -13,9 +16,16 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 public class Client extends Application {
+	// JDBC Data Members.
 	private static final String SERVER_ADDRESS = "127.0.0.1";
 	private static final int SERVER_PORT = 8080;
 	private Stage primary;
+	
+	// API Data Members.
+	private static final String host = "https://rapidapi.com/apiheya/api/sky-scrapper";
+	private static final String charSet = "UTF-8";
+	private static final String x_rapidapi_host = "sky-scrapper.p.rapidapi.com";
+	private static final String x_rapidapi_key = "1d7688e53emshc14635c6a9a41b4p1f00bbjsnd3275bd81949";
 	
 	public void start(Stage primary) {
 		this.primary = primary;
@@ -109,7 +119,7 @@ public class Client extends Application {
 			        
 			     if (isAuthenticated) {
 			    	 statusLabel.setText("Login Successful.");
-			         showHomePage();
+			         showFlightBooking();
 			     } else {
 			         statusLabel.setText("Invalid Username or Password");
 			     }
@@ -235,7 +245,23 @@ public class Client extends Application {
 		primary.show();
 	}
 	
-	private void showHomePage() {
+	private void showFlightBooking() {
+		
+	}
+	
+	private void showFlightSearchResults() {
+		
+	}
+	
+	private void showFlightDetails() {
+	
+	}
+	
+	private void showPayment() {
+		
+	}
+	
+	private void showUserProfile() {
 		
 	}
 	
@@ -271,8 +297,10 @@ public class Client extends Application {
 		}
 	}
 	
-	private void searchFlights(String src, String dst, int numAdults, int numChildren, int numInfants, String flightType) {
-		
+	private void searchFlights(String src, String dst, String date, int numAdults, int numChildren, int numInfants, String flightType) throws UnirestException {
+		String srcIds = SearchFlights.getAirportSrc(src);
+		String dstIds = SearchFlights.getAirportDst(dst);
+		// Call getFlight.
 	}
 	
 	public static void main(String[] args) {
