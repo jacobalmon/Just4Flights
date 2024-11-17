@@ -298,9 +298,9 @@ public class Client extends Application {
 	}
 	
 	private void searchFlights(String src, String dst, String date, int numAdults, int numChildren, int numInfants, String flightType) throws UnirestException {
-		String srcIds = SearchFlights.getAirportSrc(src);
-		String dstIds = SearchFlights.getAirportDst(dst);
-		// Call getFlight.
+		String srcIds = SearchFlights.getAirport(src);
+		String dstIds = SearchFlights.getAirport(dst);
+		String flights = SearchFlights.getFlight(srcIds, dst, dstIds, dst, date, numAdults, numChildren, numInfants, flightType);
 	}
 	
 	public static void main(String[] args) {
