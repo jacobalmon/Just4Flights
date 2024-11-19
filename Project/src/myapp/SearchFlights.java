@@ -52,41 +52,77 @@ public class SearchFlights {
 	}
 	
 	public static String getFlight(String originSkyId, String destinationSkyId, String originEntityId, String destinationEntityId, String date, int numAdults, int numChildren, int numInfants, String flightType) throws UnirestException {
-		HttpResponse<String> response = Unirest.get("https://sky-scrapper.p.rapidapi.com/api/v2/flights/searchFlights?originSkyId=" + originSkyId + "&destinationSkyId=" + destinationSkyId + "&originEntityId=" + originEntityId + "&destinationEntityId=" + destinationEntityId + "&date=" + date + "&cabinClass=" + flightType + "&adults=" + numAdults + "&childrens=" + numChildren + "&infants=" + numInfants + "&sortBy=best&currency=USD&market=en-US&countryCode=US")
-				.header("x-rapidapi-key", "1d7688e53emshc14635c6a9a41b4p1f00bbjsnd3275bd81949")
-				.header("x-rapidapi-host", "sky-scrapper.p.rapidapi.com")
-				.asString();
-		
-		JSONObject jsonResponse = new JSONObject(response.getBody());
-		JSONArray flights = jsonResponse.getJSONArray("data");
-		
-		// Check if API returned any flights.
-		if (flights.length() > 0) {
-			StringBuilder flightDetails = new StringBuilder();
-			
-			// Loop Through each flight and extract details.
-			for (int i = 0; i < flights.length(); ++i) {
-					JSONObject flight = flights.getJSONObject(i);
-				
-				    String flightNumber = flight.optString("flightNumber", "N/A");
-		            String airline = flight.optString("airline", "N/A");
-		            String departureTime = flight.optString("departureTime", "N/A");
-		            String arrivalTime = flight.optString("arrivalTime", "N/A");
-		            String price = flight.optString("price", "N/A");
-		            String duration = flight.optString("duration", "N/A");
-		            String status = flight.optString("status", "N/A");
-		            
-		            flightDetails.append("Flight Number: ").append(flightNumber).append("\n")
-                    	.append("Airline: ").append(airline).append("\n")
-                    	.append("Departure Time: ").append(departureTime).append("\n")
-                    	.append("Arrival Time: ").append(arrivalTime).append("\n")
-                    	.append("Price: ").append(price).append("\n")
-                    	.append("Duration: ").append(duration).append("\n")
-                    	.append("Status: ").append(status).append("\n\n");
-			}
-			return flightDetails.toString();
-		} else {
-			return "No flights found for the specified criteria.";
-		}
+	    HttpResponse<String> response = Unirest.get("https://sky-scrapper.p.rapidapi.com/api/v2/flights/searchFlights?originSkyId=" + originSkyId 
+	            + "&destinationSkyId=" + destinationSkyId 
+	            + "&originEntityId=" + originEntityId 
+	            + "&destinationEntityId=" + destinationEntityId 
+	            + "&date=" + date 
+	            + "&cabinClass=" + flightType 
+	            + "&adults=" + numAdults 
+	            + "&childrens=" + numChildren 
+	            + "&infants=" + numInfants 
+	            + "&sortBy=best&currency=USD&market=en-US&countryCode=US")
+	        .header("x-rapidapi-key", "1d7688e53emshc14635c6a9a41b4p1f00bbjsnd3275bd81949")
+	        .header("x-rapidapi-host", "sky-scrapper.p.rapidapi.com")
+	        .asString();
+
+	    JSONObject jsonResponse = new JSONObject(response.getBody());
+
+	    // Check if "data" and "itineraries" are present
+	    if (!jsonResponse.has("data") || !jsonResponse.getJSONObject("data").has("itineraries")) {
+	        return "No flights found for the specified criteria.";
+	    }
+
+	    JSONArray itineraries = jsonResponse.getJSONObject("data").getJSONArray("itineraries");
+	    StringBuilder flightDetails = new StringBuilder();
+
+	    // Iterate through each itinerary
+	    for (int i = 0; i < itineraries.length(); i++) {
+	        JSONObject itinerary = itineraries.getJSONObject(i);
+
+	        // Extract price
+	        String price = itinerary.getJSONObject("price").optString("formatted", "N/A");
+
+	        // Extract leg details (assuming one leg per itinerary for simplicity)
+	        JSONArray legs = itinerary.getJSONArray("legs");
+	        if (legs.length() > 0) {
+	            JSONObject leg = legs.getJSONObject(0);
+
+	            // Extract basic details
+	            String origin = leg.getJSONObject("origin").optString("name", "N/A");
+	            String destination = leg.getJSONObject("destination").optString("name", "N/A");
+	            String departureTime = leg.optString("departure", "N/A");
+	            String arrivalTime = leg.optString("arrival", "N/A");
+	            int duration = leg.optInt("durationInMinutes", 0);
+	            int stopCount = leg.optInt("stopCount", 0);
+
+	            // Extract carrier details
+	            JSONArray marketingCarriers = leg.getJSONObject("carriers").getJSONArray("marketing");
+	            StringBuilder carriers = new StringBuilder();
+	            for (int j = 0; j < marketingCarriers.length(); j++) {
+	                if (j > 0) carriers.append(", ");
+	                carriers.append(marketingCarriers.getJSONObject(j).optString("name", "N/A"));
+	            }
+
+	            // Extract flight segments
+	            JSONArray segments = leg.getJSONArray("segments");
+	            String flightNumber = segments.getJSONObject(0).getJSONObject("marketingCarrier").optString("alternateId", "N/A")
+	                    + " " + segments.getJSONObject(0).optString("flightNumber", "N/A");
+
+	            // Append details
+	            flightDetails.append("Flight Number: ").append(flightNumber).append("\n")
+	                    .append("Airline(s): ").append(carriers).append("\n")
+	                    .append("Origin: ").append(origin).append("\n")
+	                    .append("Destination: ").append(destination).append("\n")
+	                    .append("Departure: ").append(departureTime).append("\n")
+	                    .append("Arrival: ").append(arrivalTime).append("\n")
+	                    .append("Duration: ").append(duration).append(" minutes\n")
+	                    .append("Stops: ").append(stopCount).append("\n")
+	                    .append("Price: ").append(price).append("\n\n");
+	        }
+	    }
+
+	    return flightDetails.length() > 0 ? flightDetails.toString() : "No flights found for the specified criteria.";
 	}
+
 }
