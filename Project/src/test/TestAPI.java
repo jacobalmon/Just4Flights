@@ -42,7 +42,6 @@ class TestAPI {
 		int infants = 0;
 		String type = "economy";
 		String response = SearchFlights.getFlight(originSkyId, destinationSkyId, originEntityId, destinationEntityId, date, adults, children, infants, type);
-		System.out.println(response);
 		String expected = "Flight Number: DL 2572\n" +
 			    "Airline(s): Delta\n" +
 			    "Origin: Seattle / Tacoma International\n" +
