@@ -297,10 +297,12 @@ public class Client extends Application {
 		}
 	}
 	
-	private void searchFlights(String src, String dst, String date, int numAdults, int numChildren, int numInfants, String flightType) throws UnirestException {
+	private String[] searchFlights(String src, String dst, String date, int numAdults, int numChildren, int numInfants, String flightType) throws UnirestException {
 		String srcIds = SearchFlights.getAirport(src);
 		String dstIds = SearchFlights.getAirport(dst);
 		String flights = SearchFlights.getFlight(srcIds, dst, dstIds, dst, date, numAdults, numChildren, numInfants, flightType);
+		String[] flightDetails = SearchFlights.parseResponse(flights);
+		return flightDetails;
 	}
 	
 	public static void main(String[] args) {

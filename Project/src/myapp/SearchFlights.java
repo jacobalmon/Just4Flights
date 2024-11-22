@@ -124,5 +124,10 @@ public class SearchFlights {
 
 	    return flightDetails.length() > 0 ? flightDetails.toString() : "No flights found for the specified criteria.";
 	}
+	
+	public static String[] parseResponse(String response) {
+		String[] parseResponse = response.split("\n\n");
+		return parseResponse;
+	}
 
 }
