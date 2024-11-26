@@ -119,7 +119,9 @@ public class Client extends Application {
 			        
 			     if (isAuthenticated) {
 			    	 statusLabel.setText("Login Successful.");
-			         showFlightBooking();
+			         //showFlightBooking();
+			    	 showFlightDetails();
+			    	 //showPayment();
 			     } else {
 			         statusLabel.setText("Invalid Username or Password");
 			     }
@@ -297,7 +299,7 @@ public class Client extends Application {
 
 	    //Create and show styles
 	    Scene flightDetailsScene = new Scene(mainContainer, 800, 400);
-	    flightDetailsScene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
+	    flightDetailsScene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
 
 	    //show window
 	    primary.setScene(flightDetailsScene);
@@ -366,7 +368,7 @@ public class Client extends Application {
 
 	    // Create and show styles
 	    Scene paymentScene = new Scene(mainContainer, 800, 400);
-	    paymentScene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
+	    paymentScene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
 
 	    //Set and show payment page
 	    primary.setScene(paymentScene);
