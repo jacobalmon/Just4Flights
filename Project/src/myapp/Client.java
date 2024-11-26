@@ -254,11 +254,124 @@ public class Client extends Application {
 	}
 	
 	private void showFlightDetails() {
-	
+		//Main container for flight details
+	    HBox mainContainer = new HBox(20);
+	    mainContainer.getStyleClass().add("main-container");
+
+	    //First box for airline/flight details
+	    VBox flightDetails1 = new VBox(10);
+	    flightDetails1.getStyleClass().add("card-container");
+	    
+	    Label flightDetailsTitle1 = new Label("AIRLINE/FLIGHT DETAILS");
+	    flightDetailsTitle1.getStyleClass().add("section-title");
+	    
+	    Label detail1_1 = new Label("Flight: Just4");
+	    Label detail1_2 = new Label("Departure: New York");
+	    Label detail1_3 = new Label("Arrival: Los Angeles");
+	    Label detail1_4 = new Label("Date: Dec 25, 2024");
+	    Label detail1_5 = new Label("Duration: 6h");
+	    Label detail1_6 = new Label("Airline: Just4");
+
+	    flightDetails1.getChildren().addAll(flightDetailsTitle1, detail1_1, detail1_2, detail1_3, detail1_4, detail1_5, detail1_6);
+	    
+	    //Second box for airling.flight for additional details
+	    VBox flightDetails2 = new VBox(10);
+	    flightDetails2.getStyleClass().add("card-container");
+
+	    Label flightDetailsTitle2 = new Label("ADDITIONAL DETAILS");
+	    flightDetailsTitle2.getStyleClass().add("section-title");
+	    
+	    Label detail2_1 = new Label("Price: $350");
+	    Label detail2_2 = new Label("Baggage: 2 bags");
+	    Label detail2_3 = new Label("Seat: Economy");
+
+	    flightDetails2.getChildren().addAll(flightDetailsTitle2, detail2_1, detail2_2, detail2_3);
+
+	    //Book Flight Button
+	    Button bookFlightButton = new Button("BOOK FLIGHT");
+	    bookFlightButton.getStyleClass().add("action-button");
+	    bookFlightButton.setOnAction(e -> showPayment());
+
+	    //Add components + button to main container
+	    mainContainer.getChildren().addAll(flightDetails1, flightDetails2, bookFlightButton);
+
+	    //Create and show styles
+	    Scene flightDetailsScene = new Scene(mainContainer, 800, 400);
+	    flightDetailsScene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
+
+	    //show window
+	    primary.setScene(flightDetailsScene);
+	    primary.setTitle("Flight Details");
+	    primary.show();
 	}
 	
 	private void showPayment() {
-		
+		 //Main container for payment and flight details
+	    HBox mainContainer = new HBox(20);
+	    mainContainer.getStyleClass().add("main-container");
+
+	    //Payment details container
+	    VBox paymentDetailsContainer = new VBox(15);
+	    paymentDetailsContainer.getStyleClass().add("card-container");
+
+	    //Title for payment details
+	    Label paymentDetailsTitle = new Label("PAYMENT DETAILS");
+	    paymentDetailsTitle.getStyleClass().add("section-title");
+
+	    //Card number input field
+	    TextField cardNumberField = new TextField();
+	    cardNumberField.setPromptText("Card Number");
+	    cardNumberField.getStyleClass().add("text-field");
+
+	    TextField expiryField = new TextField();
+	    expiryField.setPromptText("MM/YY");
+	    expiryField.getStyleClass().add("text-field");
+
+	    TextField cvcField = new TextField();
+	    cvcField.setPromptText("CVC");
+	    cvcField.getStyleClass().add("text-field");
+
+	    HBox expiryAndCvcContainer = new HBox(10, expiryField, cvcField);
+	    expiryAndCvcContainer.getStyleClass().add("name-container");
+
+	    //Checkout Button
+	    Button checkoutButton = new Button("Checkout");
+	    checkoutButton.getStyleClass().add("action-button");
+	    checkoutButton.setOnAction(e -> {
+	        //Add checkout logic here. PLACEHOLDERRRR
+	    });
+
+	    //Add payment details to container
+	    paymentDetailsContainer.getChildren().addAll(paymentDetailsTitle, cardNumberField, expiryAndCvcContainer, checkoutButton);
+
+	    //Flight review details container
+	    VBox flightDetailsContainer = new VBox(15);
+	    flightDetailsContainer.getStyleClass().add("card-container");
+
+	    //Title for flight review section
+	    Label flightDetailsTitle = new Label("REVIEW FLIGHT DETAILS");
+	    flightDetailsTitle.getStyleClass().add("section-title");
+
+	    //Flight detail labels
+	    Label flightDetail1 = new Label("Flight: Just4");
+	    Label flightDetail2 = new Label("Departure: New York");
+	    Label flightDetail3 = new Label("Arrival: Los Angeles");
+	    Label flightDetail4 = new Label("Price: $350");
+
+	    //Add flight details to container
+	    flightDetailsContainer.getChildren().addAll(flightDetailsTitle, flightDetail1, flightDetail2, flightDetail3, flightDetail4);
+
+	    //Add components to the main container
+	    mainContainer.getChildren().addAll(paymentDetailsContainer, flightDetailsContainer);
+
+	    // Create and show styles
+	    Scene paymentScene = new Scene(mainContainer, 800, 400);
+	    paymentScene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
+
+	    //Set and show payment page
+	    primary.setScene(paymentScene);
+	    primary.setTitle("Payment Page");
+	    primary.show();
 	}
 	
 	private void showUserProfile() {
