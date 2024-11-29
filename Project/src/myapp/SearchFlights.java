@@ -33,8 +33,6 @@ public class SearchFlights {
 	        JSONObject jsonResponse = new JSONObject(response.getBody());
 	        JSONArray airports = jsonResponse.optJSONArray("data");
 
-	        System.out.println(jsonResponse);
-
 	        // Check if the API returned any airports.
 	        if (airports != null && airports.length() > 0) {
 	            JSONObject firstAirport = airports.getJSONObject(0);
