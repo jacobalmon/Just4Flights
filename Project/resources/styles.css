@@ -1,264 +1,527 @@
-/* Main container styling for the login page */
-#loginPane {
-    -fx-background-color: #FFFFFF;
-    -fx-padding: 20px;
-    -fx-border-radius: 10px;
-    -fx-background-radius: 10px;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);
-    -fx-alignment: center;
-    -fx-spacing: 10px; /* Space between elements */
+/* STYLING FOR LOGIN PAGE */
+	#login-card-container {
+	    -fx-background-color: #FFFFFF; /* White background for the card */
+	    -fx-padding: 20px;
+	    -fx-border-radius: 10px;
+	    -fx-background-radius: 10px;
+	    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0); /* Shadow effect */
+	    -fx-alignment: center;
+	    -fx-spacing: 15px; /* Space between elements inside the card */
+	}
+	
+	/* Styling for input fields */
+	#login-card-container .username-field {
+	    -fx-background-color: #E5E5E5;
+	    -fx-border-radius: 5px;
+	    -fx-background-radius: 5px;
+	    -fx-padding: 10px;
+	    -fx-font-size: 14px;
+	    -fx-prompt-text-fill: #888888;
+	    -fx-border-color: transparent;
+	    -fx-pref-width: 200px;
+	}
+	
+	#login-card-container .password-field{
+		-fx-background-color: #E5E5E5;
+		-fx-border-radius: 5px;
+		-fx-background-radius: 5px;
+		-fx-padding: 10px;
+		-fx-font-size: 14px;
+		-fx-prompt-text-fill: #888888;
+		-fx-border-color: transparent;
+		-fx-pref-width: 200px;
+	}
+	
+	/* Styling for the Welcome label */
+	#login-card-container .welcome-label {
+	    -fx-font-family: "Arial";
+	    -fx-font-size: 24px !important;
+		-fx-font-weight: bold;
+	    -fx-text-fill: #333333;
+	    -fx-padding: 10px 0 20px 0; /* Adds spacing below the text */
+	}
+	
+	/* Button styling */
+	#login-card-container .button {
+	    -fx-background-color: #89CFF0;
+	    -fx-text-fill: #FFFFFF;
+	    -fx-font-size: 14px;             /* Adjust font size for better fit */
+	    -fx-font-family: "Arial Black";
+	    -fx-padding: 10px;
+	    -fx-background-radius: 5px;
+	    -fx-border-radius: 5px;
+	    -fx-pref-width: 200px;
+	    -fx-wrap-text: true;             /* Enable text wrapping */
+	    -fx-text-alignment: center;      /* Center-align the text */
+	}
+	
+	#login-card-container .button:hover {
+	    -fx-scale-x: 1.01;
+		-fx-scale-y: 1.01;
+		-fx-background-color: #5D99C6; /* Slightly darker coral on hover */
+	}
+	
+	/* Status label styling */
+	#statusLabel {
+	    -fx-text-fill: #FF0000; /* Red color for error messages */
+	    -fx-font-size: 12px;
+	}
+	
+	.or-label {
+	    -fx-font-size: 14px;
+	    -fx-font-weight: bold;
+	    -fx-text-fill: #555555;
+	    -fx-padding: 0 10px; /* Adds a bit of padding */
+	}
+	
+	/* Styling for separators */
+	.separator {
+	    -fx-background-color: #CCCCCC; /* Light gray color */
+	    -fx-border-width: 1px;         /* Thickness of the line */
+	    -fx-pref-height: 1px;          /* Sets height to make it look like a line */
+	}
+
+/* Styling for the Register Card Container */
+	#register-card-container {
+	    -fx-background-color: #FFFFFF; /* White background */
+	    -fx-padding: 40px;             /* Padding around the card */
+	    -fx-border-radius: 10px;       /* Rounded corners */
+	    -fx-background-radius: 10px;  /* Consistent border radius */
+	    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0); /* Shadow effect */
+	    -fx-spacing: 20px;            /* Space between elements inside */
+	    -fx-alignment: center;        /* Center-align elements */
+	}
+	
+	/* TextField styling under Register Card */
+	#register-card-container .first-name-field,
+	#register-card-container .last-name-field,
+	#register-card-container .email-field,
+	#register-card-container .new-password-field,
+	#register-card-container .confirm-password-field {
+	    -fx-background-color: #f0f0f0;
+	    -fx-border-radius: 5px;
+	    -fx-background-radius: 5px;
+	    -fx-padding: 10px;
+	    -fx-font-size: 14px;
+	    -fx-prompt-text-fill: #888888;
+	    -fx-border-color: transparent;
+	    -fx-pref-width: 250px;
+	}
+	
+	/* Button styling under Register Card */
+	#register-card-container .create-account-button {
+	    -fx-background-color: #89CFF0;
+	    -fx-text-fill: #FFFFFF;
+	    -fx-font-size: 14px;
+	    -fx-font-family: "Arial Black";
+	    -fx-padding: 10px;
+	    -fx-background-radius: 5px;
+	    -fx-border-radius: 5px;
+	    -fx-pref-width: 200px;
+	}
+	
+	#register-card-container .create-account-button:hover {
+	    -fx-scale-x: 1.05;
+	    -fx-scale-y: 1.05;
+	    -fx-background-color: #5D99C6; /* Slightly darker shade */
+	}
+	
+	.main-container {
+	    -fx-alignment: center;
+	    -fx-padding: 50;
+	    -fx-spacing: 20;
+	}
+	
+	/* Title label styling */
+	#createAccount-title-label {
+	    -fx-font-size: 24px;
+	    -fx-font-weight: bold;
+	    -fx-padding: 10;
+	}
+	
+	#register-card-container .back-button {
+		-fx-background-color: transparent; /* Transparent background */
+		-fx-text-fill: #5D99C6; /* Match the darker blue color */
+		-fx-font-size: 14px;
+		-fx-font-family: "Arial";
+		-fx-padding: 5px 10px;
+		-fx-cursor: hand; /* Show hand cursor on hover */
+		-fx-border-radius: 5px;
+	}
+	
+	#register-card-container .back-button:hover {
+		-fx-text-fill: #89CFF0;
+		-fx-underline: true;
+	}
+	
+	/* Status label styling */
+	#register-card-container .status-label {
+	    -fx-text-fill: red;
+	    -fx-font-size: 12px;
+	    -fx-padding: 5;
+	}
+
+/* FLIGHT DETAILS STYLING */
+	/* Main Container for Flight Details */
+	.flight-details-main-container {
+	    -fx-alignment: center;
+	    -fx-spacing: 20px;
+	    -fx-padding: 20px;
+	}
+	
+	/* Airline/Flight Details Card */
+	.flight-details-card {
+	    -fx-background-color: #FFFFFF;
+	    -fx-padding: 15px;
+	    -fx-border-radius: 10px;
+	    -fx-background-radius: 10px;
+	    -fx-border-color: #DDDDDD;
+	    -fx-border-width: 1px;
+	    -fx-spacing: 10px;
+	    -fx-max-width: 300px;
+		-fx-min-height: 250px;
+		-fx-max-height: 250px;
+	    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 2, 2);
+	}
+	
+	/* Additional Details Card */
+	.additional-details-card {
+	    -fx-background-color: #FFFFFF;
+	    -fx-padding: 15px;
+	    -fx-border-radius: 10px;
+	    -fx-background-radius: 10px;
+	    -fx-border-color: #DDDDDD;
+	    -fx-border-width: 1px;
+	    -fx-spacing: 10px;
+	    -fx-max-width: 300px;
+		-fx-min-height: 250px;
+		-fx-max-height: 250px;
+	    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 2, 2);
+	}
+	
+	/* Section Titles */
+	.flight-details-section-title, .additional-details-section-title {
+	    -fx-font-size: 16px;
+	    -fx-font-weight: bold;
+	    -fx-text-fill: #333333;
+	}
+	
+	/* Labels Inside Airline/Flight Details Card */
+	.flight-details-label {
+	    -fx-font-size: 14px;
+	    -fx-text-fill: #666666;
+	}
+	
+	/* Labels Inside Additional Details Card */
+	.additional-details-label {
+	    -fx-font-size: 14px;
+	    -fx-text-fill: #666666;
+	}
+	
+	/* Book Flight Button */
+	.book-flight-action-button {
+	    -fx-background-color: #87CEEB;
+	    -fx-text-fill: #FFFFFF;
+	    -fx-font-size: 16px;
+	    -fx-font-weight: bold;
+	    -fx-padding: 10px 20px;
+	    -fx-border-radius: 5px;
+	    -fx-cursor: hand;
+	    -fx-alignment: center;
+	}
+	
+	.book-flight-action-button:hover {
+	    -fx-background-color: #5CA9D6;
+	}
+
+/* STYLING FOR PAYMENT PAGE */
+
+	.payment-container {
+	    -fx-alignment: center;
+	    -fx-padding: 20px;
+	    -fx-spacing: 20px;
+	}
+	
+	/* Card container for payment details */
+	.payment-details-card {
+	    -fx-background-color: #FFFFFF;
+	    -fx-padding: 20px;
+	    -fx-border-radius: 10px;
+	    -fx-background-radius: 10px;
+	    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 10, 0, 0, 0);
+	    -fx-spacing: 15px;
+		-fx-pref-width: 300px; /* Maintain a consistent width */
+		-fx-max-width: 400px;  /* Allow the card to expand if needed */
+		-fx-pref-height: 250px;
+		-fx-max-height: 250px;  /* Dynamically adjust height based on content */
+	}
+	
+	/* Title for the payment section */
+	.payment-details-title {
+	    -fx-font-size: 16px;
+	    -fx-font-weight: bold;
+	    -fx-text-fill: #333;
+	}
+	
+	/* Payment input fields (card number, expiry, CVC) */
+	.payment-input {
+	    -fx-background-color: #f0f0f0;
+	    -fx-padding: 8px;
+	    -fx-border-radius: 5px;
+	    -fx-background-radius: 5px;
+	    -fx-pref-width: 250px;
+	}
+	
+	/* Expiry and CVC fields container */
+	.expiry-cvc-container {
+	    -fx-spacing: 10px;
+	}
+	
+	/* Checkout button */
+	.checkout-button {
+	    -fx-background-color: #87CEEB;
+	    -fx-text-fill: white;
+	    -fx-font-size: 14px;
+	    -fx-font-weight: bold;
+	    -fx-padding: 10px;
+	    -fx-background-radius: 5px;
+	    -fx-cursor: hand;
+	    -fx-transition: all 0.2s ease-in-out;
+	}
+	
+	.checkout-button:hover {
+	    -fx-background-color: #5CA9D6;
+	}
+	
+	/* Review flight details section */
+	.flight-review-container {
+	    -fx-background-color: #FFFFFF;
+	    -fx-padding: 20px;
+	    -fx-border-radius: 10px;
+	    -fx-background-radius: 10px;
+	    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 10, 0, 0, 0);
+	    -fx-spacing: 15px;
+	    -fx-pref-width: 400px;
+		-fx-max-width: 500px;  /* Allow the card to expand if needed */
+		-fx-max-height: 250px;  /* Dynamically adjust height based on content */
+		-fx-pref-height: 250px;
+	}
+	
+	/* Flight review labels */
+	.flight-review-label {
+	    -fx-font-size: 14px;
+	    -fx-text-fill: #555;
+	    -fx-padding: 5px 0;
+	}
+
+/* STYLING FOR SEARCH FLIGHTS */
+	
+	/* Main container for the page */
+	#main-container {
+	    -fx-alignment: center;
+	    -fx-spacing: 20px;
+	    -fx-padding: 20px;
+	}
+	
+	/* Card container for grouping all fields */
+	#homepage-card-container {
+	    -fx-background-color: #FFFFFF;
+	    -fx-padding: 30px;
+	    -fx-border-radius: 10px;
+	    -fx-background-radius: 10px;
+	    -fx-border-color: #DDDDDD;
+	    -fx-border-width: 1px;
+	    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.15), 15, 0, 0, 0);
+	    -fx-spacing: 20px;
+	    -fx-alignment: top-left; /* Align all elements to the top-left */
+	    -fx-min-width: 400px;
+	}
+	
+	/* Labels */
+	#from-label, #to-label, #date-label, #passengers-label, #flight-type-label {
+	    -fx-font-size: 14px;
+	    -fx-font-weight: bold;
+	    -fx-text-fill: #333333;
+	}
+	
+	/* Input Fields */
+	#from-field, #to-field, #date-field {
+	    -fx-background-color: #F5F5F5;
+	    -fx-padding: 10px;
+	    -fx-border-radius: 5px;
+	    -fx-font-size: 14px;
+	    -fx-pref-width: 250px;
+	    -fx-border-color: transparent;
+	    -fx-prompt-text-fill: #888888;
+	}
+	
+	/* Spinner Styling */
+	#adults-spinner, #children-spinner {
+	    -fx-pref-width: 75px;
+	}
+	
+	/* Dropdown */
+	#flight-type-dropdown {
+	    -fx-background-color: #F5F5F5;
+	    -fx-padding: 10px;
+	    -fx-border-radius: 5px;
+	    -fx-font-size: 14px;
+	    -fx-pref-width: 250px;
+	    -fx-border-color: transparent;
+	    -fx-prompt-text-fill: #888888;
+	}
+	
+	#flight-type-dropdown:hover{
+		-fx-background-color: #F0F0F0;
+	}
+	
+	/* Search Button */
+	#search-button {
+	    -fx-background-color: #89CFF0;
+	    -fx-text-fill: #FFFFFF;
+	    -fx-font-size: 16px;
+	    -fx-font-weight: bold;
+	    -fx-padding: 10px 20px;
+	    -fx-border-radius: 5px;
+	    -fx-cursor: hand;
+	}
+	
+	#search-button:hover {
+		-fx-scale-x: 1.01;
+		-fx-scale-y: 1.01;
+		-fx-background-color: #5D99C6; /* Slightly darker coral on hover */
+	}
+	
+/* SEARCH RESULTS PAGE */
+	
+	/* Title Label */
+	#title-label {
+	    -fx-font-size: 20px;
+	    -fx-font-weight: bold;
+	    -fx-text-fill: #333333;
+	    -fx-padding: 10px 0;
+	}
+	
+	/* Scroll Pane */
+	.scroll-pane {
+	    -fx-background-color: transparent;
+	    -fx-padding: 10px;
+	    -fx-fit-to-width: true;
+	    -fx-border-color: transparent;
+	}
+	
+	/* Results Container */
+	.results-container {
+	    -fx-spacing: 15px;
+	    -fx-alignment: center;
+	    -fx-padding: 10px;
+	}
+	
+	/* Flight Card */
+	.flight-card {
+	    -fx-background-color: #F9F9F9;
+	    -fx-padding: 15px;
+	    -fx-border-radius: 10px;
+	    -fx-background-radius: 10px;
+	    -fx-border-color: #DDDDDD;
+	    -fx-border-width: 1px;
+	    -fx-spacing: 10px;
+	    -fx-alignment: top-left;
+	}
+	
+	/* Flight Details Label */
+	.flight-details {
+	    -fx-font-size: 14px;
+	    -fx-font-weight: normal;
+	    -fx-text-fill: #333333;
+	    -fx-wrap-text: true;
+	}
+	
+	/* See Details Button */
+	.details-button {
+	    -fx-background-color: #87CEEB;
+	    -fx-text-fill: #FFFFFF;
+	    -fx-font-size: 14px;
+	    -fx-padding: 5px 15px;
+	    -fx-border-radius: 5px;
+	    -fx-cursor: hand;
+	    -fx-alignment: center;
+	}
+	
+	.details-button:hover {
+	    -fx-background-color: #5CA9D6;
+	}
+	
+	/* Back Button */
+	.action-button {
+	    -fx-background-color: #87CEEB;
+	    -fx-text-fill: #FFFFFF;
+	    -fx-font-size: 16px;
+	    -fx-font-weight: bold;
+	    -fx-padding: 10px 20px;
+	    -fx-border-radius: 5px;
+	    -fx-cursor: hand;
+	    -fx-alignment: center-left; /* Align button text to the left */
+	}
+	
+	.action-button:hover {
+	    -fx-background-color: #5CA9D6;
+	}
+
+/* BACK BUTTON CSS */
+
+/* Back/Navigation Button */
+.navigation-button {
+	-fx-background-color: transparent; /* Transparent background */
+	-fx-text-fill: #5D99C6; /* Match the darker blue color */
+	-fx-font-size: 14px;
+	-fx-font-family: "Arial";
+	-fx-padding: 5px 10px;
+	-fx-cursor: hand; /* Show hand cursor on hover */
+	-fx-border-radius: 5px;
 }
 
-/* Styling for input fields */
-.text-field, .password-field {
-    -fx-background-color: #E5E5E5;
-    -fx-border-radius: 5px;
-    -fx-background-radius: 5px;
-    -fx-padding: 10px;
-    -fx-font-size: 14px;
-    -fx-prompt-text-fill: #888888;
-    -fx-border-color: transparent;
-    -fx-pref-width: 200px;
+.navigation-button:hover {
+	-fx-text-fill: #89CFF0;
+	-fx-underline: true;
 }
 
-/* Styling for the Welcome label */
-.welcome-label {
-    -fx-font-family: "SansSerif";
-	-fx-font-weight: Bold;
-    -fx-font-size: 24px;
-    -fx-text-fill: #333333;
-    -fx-padding: 10px 0 20px 0; /* Adds spacing below the text */
+
+/* HEADER CSS */
+#header {
+    -fx-background-color: #FFFFFF; /* White background */
+    -fx-padding: 10px 20px;
+    -fx-border-color: #DDDDDD; /* Subtle bottom border */
+    -fx-border-width: 0 0 1px 0;
 }
 
-/* Button styling */
-.button {
-    -fx-background-color: #FF7F7F;
-    -fx-text-fill: #FFFFFF;
-    -fx-font-size: 14px;             /* Adjust font size for better fit */
-    -fx-font-family: "Arial Black";
-    -fx-padding: 10px;
-    -fx-background-radius: 5px;
-    -fx-border-radius: 5px;
-    -fx-pref-width: 200px;
-    -fx-wrap-text: true;             /* Enable text wrapping */
-    -fx-text-alignment: center;      /* Center-align the text */
-}
-
-.button:hover {
-    -fx-background-color: #FF6B6B; /* Slightly darker coral on hover */
-}
-
-/* Status label styling */
-#statusLabel {
-    -fx-text-fill: #FF0000; /* Red color for error messages */
-    -fx-font-size: 12px;
-}
-
-/* Styling for the card container */
-#cardContainer {
-    -fx-background-color: #FFFFFF; /* White background for the card */
-    -fx-padding: 20px;
-    -fx-border-radius: 10px;
-    -fx-background-radius: 10px;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0); /* Shadow effect */
-    -fx-alignment: center;
-    -fx-spacing: 15px; /* Space between elements inside the card */
-}
-
-.or-label {
-    -fx-font-size: 14px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #555555;
-    -fx-padding: 0 10px; /* Adds a bit of padding */
-}
-
-/* Styling for separators */
-.separator {
-    -fx-background-color: #CCCCCC; /* Light gray color */
-    -fx-border-width: 1px;         /* Thickness of the line */
-    -fx-pref-height: 1px;          /* Sets height to make it look like a line */
-}
-
-/* Main container styling */
-.main-container {
-    -fx-alignment: center;
-    -fx-padding: 50;
-}
-
-/* Card container styling */
-.card-container {
-    -fx-background-color: #FFFFFF;
-    -fx-padding: 40;
-    -fx-border-radius: 10;
-    -fx-background-radius: 10;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);
-    -fx-spacing: 20;
-}
-
-/* Title label styling */
-#title-label {
+/* Logo Button */
+#logo-button {
+	-fx-background-color: transparent;
     -fx-font-size: 20px;
     -fx-font-weight: bold;
-    -fx-padding: 10;
-}
-
-/* Text field styling */
-.text-field {
-    -fx-background-color: #f0f0f0;
-    -fx-padding: 8px;
-    -fx-border-radius: 5px;
-    -fx-background-radius: 5px;
-	-fx-pref-width: 300px; /* Set consistent width to align with name fields */
-}
-
-/* Styling for the Create Account button */
-#create-account-button {
-    -fx-background-color: #FF7F7F;
-    -fx-text-fill: #FFFFFF;
-    -fx-font-size: 16px;
-    -fx-padding: 10px 20px;
-    -fx-background-radius: 5px;
-    -fx-border-radius: 5px;
-    -fx-cursor: hand; /* Change cursor to hand pointer */
-    -fx-transition: all 0.2s ease-in-out; /* Smooth transition for the hover effect */
-}
-
-/* Hover effect: Change background color and slightly expand */
-#create-account-button:hover {
-    -fx-background-color: #FF6B6B; /* Darker shade for highlight */
-}
-
-/* Status label styling */
-#status-label {
-    -fx-text-fill: red;
-    -fx-font-size: 12px;
-    -fx-padding: 5;
-}
-
-/* Container styling for HBoxes */
-.name-container, .password-container {
-    -fx-alignment: center;
-    -fx-spacing: 10;
-}
-
-/* Flight Details Section Styling */
-/* Styling for the main container of the flight details page */
-.flight-details-container {
-    -fx-alignment: center;
-    -fx-padding: 20px;
-    -fx-spacing: 20px;
-}
-
-/* Card container for the flight details */
-.flight-details-card {
-    -fx-background-color: #FFFFFF;
-    -fx-padding: 20px;
-    -fx-border-radius: 10px;
-    -fx-background-radius: 10px;
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 10, 0, 0, 0);
-    -fx-spacing: 15px;
-    -fx-pref-width: 300px;
-}
-
-/* Title for each section within the flight details card */
-.flight-details-title {
-    -fx-font-size: 16px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #333;
-}
-
-/* Flight details labels */
-.flight-details-label {
-    -fx-font-size: 14px;
-    -fx-text-fill: #555;
-    -fx-padding: 5px 0;
-}
-
-/* Styling for the Book Flight button */
-.book-flight-button {
-    -fx-background-color: #FF7F7F;
-    -fx-text-fill: white;
-    -fx-font-size: 14px;
-    -fx-font-weight: bold;
     -fx-padding: 10px;
-    -fx-background-radius: 5px;
     -fx-cursor: hand;
-    -fx-transition: all 0.2s ease-in-out;
 }
 
-.book-flight-button:hover {
-    -fx-background-color: #FF6B6B;
-}
-
-/* Styling for the payment page */
-.payment-container {
-    -fx-alignment: center;
-    -fx-padding: 20px;
-    -fx-spacing: 20px;
-}
-
-/* Card container for payment details */
-.payment-details-card {
-    -fx-background-color: #FFFFFF;
-    -fx-padding: 20px;
-    -fx-border-radius: 10px;
-    -fx-background-radius: 10px;
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 10, 0, 0, 0);
-    -fx-spacing: 15px;
-    -fx-pref-width: 300px;
-}
-
-/* Title for the payment section */
-.payment-details-title {
-    -fx-font-size: 16px;
+/* Page Title */
+#page-title {
+    -fx-font-size: 20px;
     -fx-font-weight: bold;
-    -fx-text-fill: #333;
+    -fx-text-fill: #333333;
+    -fx-alignment: center-left;
 }
 
-/* Payment input fields (card number, expiry, CVC) */
-.payment-input {
-    -fx-background-color: #f0f0f0;
-    -fx-padding: 8px;
+/* Hamburger Menu */
+#hamburger-menu {
+    -fx-font-size: 20px;
+    -fx-text-fill: #333333;
+    -fx-cursor: hand;
+    -fx-padding: 5px 10px;
     -fx-border-radius: 5px;
-    -fx-background-radius: 5px;
-    -fx-pref-width: 250px;
+    -fx-background-color: transparent;
 }
 
-/* Expiry and CVC fields container */
-.expiry-cvc-container {
-    -fx-spacing: 10px;
-}
-
-/* Checkout button */
-.checkout-button {
-    -fx-background-color: #FF7F7F;
-    -fx-text-fill: white;
-    -fx-font-size: 14px;
-    -fx-font-weight: bold;
-    -fx-padding: 10px;
-    -fx-background-radius: 5px;
-    -fx-cursor: hand;
-    -fx-transition: all 0.2s ease-in-out;
-}
-
-.checkout-button:hover {
-    -fx-background-color: #FF6B6B;
-}
-
-/* Review flight details section */
-.flight-review-container {
-    -fx-background-color: #FFFFFF;
-    -fx-padding: 20px;
-    -fx-border-radius: 10px;
-    -fx-background-radius: 10px;
-    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 10, 0, 0, 0);
-    -fx-spacing: 15px;
-    -fx-pref-width: 400px;
-}
-
-/* Flight review labels */
-.flight-review-label {
-    -fx-font-size: 14px;
-    -fx-text-fill: #555;
-    -fx-padding: 5px 0;
+#hamburger-menu:hover {
+    -fx-background-color: #F0F0F0;
 }
