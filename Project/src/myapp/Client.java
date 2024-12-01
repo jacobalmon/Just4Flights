@@ -12,6 +12,8 @@ import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import org.json.JSONArray;
+
 import com.google.gson.Gson;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import javafx.application.Application;
@@ -31,6 +33,8 @@ public class Client extends Application {
 	private static final int SERVER_PORT = 8080;
 	private Stage primary;
 	private String final_username;
+	private String final_firstname;
+	private String final_lastname;
 	
 	public void start(Stage primary) {
 		this.primary = primary;
@@ -467,7 +471,6 @@ public class Client extends Application {
 	    primary.show();
 	}
 
-
 	private void showFlightSearchResults(String[] flights) {
 		// Main container for the page
 	    VBox pageContainer = new VBox(20); // Wrap everything in a VBox
@@ -523,7 +526,6 @@ public class Client extends Application {
 	    primary.setScene(resultsScene);
 	    primary.setTitle("Search Results");
 	}
-
 	
 	private void showFlightDetails(String[] flights, String flight) {
 		// Main container for flight details
@@ -680,80 +682,119 @@ public class Client extends Application {
 	}
 	
 	private void showUserProfile() {
-	    // Main container for the page
-	    VBox pageContainer = new VBox(20);
+	    // Get Flights for their profile
+	    String[] flights = extractUserDetails(final_username);
+
+	    // Main container for the page (using BorderPane for easy positioning)
+	    BorderPane pageContainer = new BorderPane();
 	    pageContainer.getStyleClass().add("page-container");
 
-	    // Add header to the page
-	    pageContainer.getChildren().add(createHeader("User Profile"));
+	    // Add header to the page (header can go at the top)
+	    pageContainer.setTop(createHeader("User Profile"));
 
-	    // Card container for grouping all form elements
-	    VBox cardContainer = new VBox(20);
-	    cardContainer.setId("homepage-card-container");
-	    cardContainer.setAlignment(Pos.TOP_LEFT); // Align everything to the left
-	    cardContainer.setPadding(new Insets(20));
+	    // Create the container to hold both the user info and the flights
+	    HBox mainContent = new HBox(20);  // Horizontal spacing between the two sections
+	    mainContent.setPadding(new Insets(20));
 
-	    // User Information
+	    // Left side: User Information group
 	    VBox userInfoGroup = new VBox(10);
-
+	    
 	    // First Name
-	    HBox firstNameGroup = new HBox(10); // Horizontal box for first name
+	    HBox firstNameGroup = new HBox(10);
 	    Label firstNameLabel = new Label("First Name: ");
 	    firstNameLabel.setStyle("-fx-font-weight: bold;");
-	    Label firstNameValue = new Label("John");
+	    Label firstNameValue = new Label(final_firstname);
 	    firstNameGroup.getChildren().addAll(firstNameLabel, firstNameValue);
 
 	    // Last Name
-	    HBox lastNameGroup = new HBox(10); // Horizontal box for last name
+	    HBox lastNameGroup = new HBox(10);
 	    Label lastNameLabel = new Label("Last Name: ");
 	    lastNameLabel.setStyle("-fx-font-weight: bold;");
-	    Label lastNameValue = new Label("Doe");
+	    Label lastNameValue = new Label(final_lastname);
 	    lastNameGroup.getChildren().addAll(lastNameLabel, lastNameValue);
 
 	    // Email
-	    HBox emailGroup = new HBox(10); // Horizontal box for email
+	    HBox emailGroup = new HBox(10);
 	    Label emailLabel = new Label("Email: ");
 	    emailLabel.setStyle("-fx-font-weight: bold;");
-	    Label emailValue = new Label("john.doe@example.com");
+	    Label emailValue = new Label(final_username);
 	    emailGroup.getChildren().addAll(emailLabel, emailValue);
 
 	    // Add to userInfoGroup
 	    userInfoGroup.getChildren().addAll(firstNameGroup, lastNameGroup, emailGroup);
 
-	    // Flights Information (hardcoded)
+	    // Right side: Flights Group with indent
 	    VBox flightsGroup = new VBox(10);
-
-	    // Upcoming Flights label in bold
-	    Label flightsLabel = new Label("Upcoming Flights:");
+	    Label flightsLabel = new Label("Past & Upcoming Flights:");
 	    flightsLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 18px;");
-
+	    
 	    VBox flightsList = new VBox(5);
-	    Label flight1Label = new Label("Flight 1: New York to London - 2024-12-15");
-	    Label flight2Label = new Label("Flight 2: Paris to Tokyo - 2025-01-10");
-	    Label flight3Label = new Label("Flight 3: Berlin to Sydney - 2025-03-05");
+	    for (String flight : flights) {
+	        // Clean up the flight string by removing quotes and escaped newlines
+	        String cleanedFlight = flight.replaceAll("\"", "").replaceAll("\\\\n", "\n").trim();
+	        
+	        // Create a label with the cleaned string for each flight
+	        Label flightLabel = new Label(cleanedFlight);
+	        
+	        // Add a separator after each flight label
+	        flightsList.getChildren().add(flightLabel);
+	        flightsList.getChildren().add(new Separator());
+	    }
 
-	    flightsList.getChildren().addAll(flight1Label, flight2Label, flight3Label);
+	    // Wrap the flightsList in a ScrollPane to make it scrollable
+	    ScrollPane flightsScrollPane = new ScrollPane(flightsList);
+	    flightsScrollPane.setFitToWidth(true); // Ensure the content fits to the width of the ScrollPane
+	    flightsScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS); // Always show vertical scrollbar if needed
+	    flightsScrollPane.setMaxHeight(500); // Limit the height of the ScrollPane (increased height for more content)
+	    flightsScrollPane.setVmax(500); // Set a max height to limit the scrollable space
 
-	    flightsGroup.getChildren().addAll(flightsLabel, flightsList);
+	    // Create an ImageView to display the cat image
+	    ImageView imageView = new ImageView(new Image("cat.jpg"));  // Adjusted to the path for the cat image
+	    imageView.setFitHeight(150);  // Adjust the height of the image
+	    imageView.setPreserveRatio(true);  // Maintain the aspect ratio of the image
 
-	    // "Go Back" Button
+	    // Create a container for the flights and the image (HBox)
+	    HBox flightsAndImageContainer = new HBox(20);
+	    flightsAndImageContainer.setAlignment(Pos.CENTER_LEFT);  // Align left
+	    
+	    // Add a spacer to indent the image to the right
+	    HBox imageSpacer = new HBox();
+	    imageSpacer.setMinWidth(100);  // Adjust the width of the indent to move the image further to the right
+
+	    // Add the flightsScrollPane and the imageView to the container
+	    flightsAndImageContainer.getChildren().addAll(flightsScrollPane, imageSpacer, imageView);
+
+	    // Add the flightsAndImageContainer to the flightsGroup
+	    flightsGroup.getChildren().addAll(flightsLabel, flightsAndImageContainer);
+
+	    // Add a spacer on the left side of the flightsGroup to push it to the right
+	    HBox flightsSpacer = new HBox();
+	    flightsSpacer.setMinWidth(100);  // Adjust the width of the indent
+
+	    // Add both the user info and the indented flights group to the main content (HBox)
+	    mainContent.getChildren().addAll(userInfoGroup, flightsSpacer, flightsGroup);
+
+	    // Add the main content (user info + flights) to the center of the BorderPane
+	    pageContainer.setCenter(mainContent);
+
+	    // "Go Back" Button at the bottom left
 	    Button goBackButton = new Button("Go Back to Search Flights");
 	    goBackButton.setId("go-back-button");
-	    goBackButton.setOnAction(e -> showFlightBooking());  // Call showFlightBooking() to go back
+	    goBackButton.setOnAction(e -> showFlightBooking());  // Navigate back to the booking page
 
-	    // Add all groups to the card container
-	    cardContainer.getChildren().addAll(userInfoGroup, flightsGroup, goBackButton);
-
-	    pageContainer.getChildren().add(cardContainer);
+	    // Set the button to the bottom left using the BorderPane's bottom region
+	    BorderPane.setAlignment(goBackButton, Pos.BOTTOM_LEFT);
+	    pageContainer.setBottom(goBackButton);
 
 	    // Set up the scene and apply styles
 	    Scene userProfileScene = new Scene(pageContainer, 1000, 600);
 	    userProfileScene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
+
+	    // Set Primary Scene.
 	    primary.setScene(userProfileScene);
 	    primary.setTitle("User Profile");
 	    primary.show();
 	}
-
 
 
 	public boolean sendLoginRequest(String username, String password) {
@@ -772,7 +813,6 @@ public class Client extends Application {
 		}
 	}
 	
-	
 	public String sendRegisterRequest(String firstname, String lastname, String email, String password) {
 		try (Socket socket = new Socket(SERVER_ADDRESS, SERVER_PORT);
 				 PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
@@ -788,7 +828,6 @@ public class Client extends Application {
 			return "Invalid Credentials";
 		}
 	}
-	
 	
 	private String[] searchFlights(String src, String dst, String date, int numAdults, int numChildren, int numInfants, String flightType) throws UnirestException {
 		// Call APIs for Airport Ids.
@@ -818,7 +857,6 @@ public class Client extends Application {
 			}
 		}
 	}
-	
 	
 	private String parseFlightType(String raw) {
 		// Parse String for API.
@@ -887,6 +925,37 @@ public class Client extends Application {
 	    }
 	}
 	
+	private String[] extractUserDetails(String username) {
+        String query = "SELECT first_name, last_name, flights FROM users WHERE username = ?";
+        String[] flightsArray = null;
+
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1/just4flights", "root", "cloudcrew123");
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setString(1, username);
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                String firstName = rs.getString("first_name");
+                String lastName = rs.getString("last_name");
+                String flightsJson = rs.getString("flights");
+
+                // Parse flights JSON to array
+                JSONArray jsonArray = new JSONArray(flightsJson);
+                flightsArray = new String[jsonArray.length()];
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    flightsArray[i] = jsonArray.getString(i);
+                }
+
+                // Set first and last names
+                final_firstname = firstName;
+                final_lastname = lastName;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return flightsArray;
+    }
 	
 	public static void main(String[] args) {
 		launch(args); // runs app.

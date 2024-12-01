@@ -579,6 +579,28 @@
     -fx-alignment: center-left;
 }
 
+#go-back-button:hover {
+	    -fx-background-color: #5CA9D6; 
+}
+
 #first-name-label, #last-name-label, #email-label {
     -fx-font-weight: bold;
+}
+
+/* Set the scrollbar to a taller size */
+.scroll-bar:vertical {
+    -fx-pref-height: 100%; /* Ensure it spans the full height */
+    -fx-pref-width: 16px; /* Width of the scrollbar */
+}
+
+/* Thumb part of the scrollbar */
+.scroll-bar .thumb {
+    -fx-background-color: #888888;
+    -fx-background-radius: 8px; /* Rounded corners for thumb */
+    -fx-min-height: 100px; /* Increase the thumb size to appear longer */
+}
+
+/* Hover effect for the thumb */
+.scroll-bar .thumb:hover {
+    -fx-background-color: #555555;
 }
