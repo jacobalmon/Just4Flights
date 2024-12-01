@@ -525,3 +525,60 @@
 #hamburger-menu:hover {
     -fx-background-color: #F0F0F0;
 }
+
+/* User Info Group */
+.user-info-group {
+    -fx-spacing: 10px;
+}
+
+/* Flight Info Group */
+.flights-group {
+    -fx-spacing: 10px;
+}
+
+/* Flight List */
+.flights-list {
+    -fx-spacing: 5px;
+}
+
+/* Label for User Info */
+.user-info-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #333333;
+}
+
+/* Label for Flights */
+.flights-label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+/* Page Container */
+.page-container {
+    -fx-padding: 20px;
+}
+
+/* Card Container */
+#homepage-card-container {
+    -fx-background-color: #f7f7f7;
+    -fx-border-radius: 10px;
+    -fx-padding: 20px;
+    -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.3) , 5,0,0,2 );
+}
+
+/* Go Back Button */
+#go-back-button {
+    -fx-background-color: #87CEEB;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5px;
+    -fx-cursor: hand;
+    -fx-alignment: center-left;
+}
+
+#first-name-label, #last-name-label, #email-label {
+    -fx-font-weight: bold;
+}

@@ -299,13 +299,12 @@ public class Client extends Application {
 	}
 	
 	private void showFlightBooking() {
-		// Main container for the page
+	    // Main container for the page
 	    VBox pageContainer = new VBox(20); // Wrap everything in a VBox
 	    pageContainer.getStyleClass().add("page-container");
 
 	    // Add header to the page
 	    pageContainer.getChildren().add(createHeader("Flight Booking"));
-	    // Add the consistent header
 
 	    // Card container for grouping all form elements
 	    VBox cardContainer = new VBox(20);
@@ -320,6 +319,7 @@ public class Client extends Application {
 	    TextField fromField = new TextField();
 	    fromField.setPromptText("Search starting location");
 	    fromField.setId("from-field");
+	    fromField.setStyle("-fx-border-color: #CCCCCC; -fx-border-width: 2px; -fx-border-radius: 5px; -fx-padding: 5px;");
 	    fromGroup.getChildren().addAll(fromLabel, fromField);
 
 	    // "To" Label and Field
@@ -329,6 +329,7 @@ public class Client extends Application {
 	    TextField toField = new TextField();
 	    toField.setPromptText("Search destination");
 	    toField.setId("to-field");
+	    toField.setStyle("-fx-border-color: #CCCCCC; -fx-border-width: 2px; -fx-border-radius: 5px; -fx-padding: 5px;");
 	    toGroup.getChildren().addAll(toLabel, toField);
 
 	    // "Date" Label and Field
@@ -338,6 +339,7 @@ public class Client extends Application {
 	    TextField dateField = new TextField();
 	    dateField.setPromptText("Enter travel date");
 	    dateField.setId("date-field");
+	    dateField.setStyle("-fx-border-color: #CCCCCC; -fx-border-width: 2px; -fx-border-radius: 5px; -fx-padding: 5px;");
 	    dateGroup.getChildren().addAll(dateLabel, dateField);
 
 	    // Passenger Selection
@@ -364,6 +366,7 @@ public class Client extends Application {
 	    flightTypeDropdown.getItems().addAll("Economy", "Premium Economy", "Business", "First Class");
 	    flightTypeDropdown.setPromptText("Select flight type");
 	    flightTypeDropdown.setId("flight-type-dropdown");
+	    flightTypeDropdown.setStyle("-fx-border-color: #CCCCCC; -fx-border-width: 2px; -fx-border-radius: 5px; -fx-padding: 5px;");
 	    flightTypeGroup.getChildren().addAll(flightTypeLabel, flightTypeDropdown);
 
 	    // Search Button
@@ -380,19 +383,19 @@ public class Client extends Application {
 
 	        // Validate the "From" field.
 	        if (fromField.getText().trim().isEmpty()) {
-	            fromField.setStyle("-fx-border-color: red; -fx-border-width: 2px;");
+	            fromField.setStyle("-fx-border-color: red; -fx-border-width: 2px; -fx-border-radius: 5px;");
 	            isValid = false;
 	        }
 
 	        // Validate the "To" field.
 	        if (toField.getText().trim().isEmpty()) {
-	            toField.setStyle("-fx-border-color: red; -fx-border-width: 2px;");
+	            toField.setStyle("-fx-border-color: red; -fx-border-width: 2px; -fx-border-radius: 5px;");
 	            isValid = false;
 	        }
 
 	        // Validate the "Date" field.
 	        if (dateField.getText().trim().isEmpty()) {
-	            dateField.setStyle("-fx-border-color: red; -fx-border-width: 2px;");
+	            dateField.setStyle("-fx-border-color: red; -fx-border-width: 2px; -fx-border-radius: 5px;");
 	            isValid = false;
 	        } else {
 	            // Check if the entered date is in the past
@@ -402,13 +405,13 @@ public class Client extends Application {
 	                LocalDate currentDate = LocalDate.now();
 
 	                if (enteredDate.isBefore(currentDate)) {
-	                    dateField.setStyle("-fx-border-color: red; -fx-border-width: 2px;");
+	                    dateField.setStyle("-fx-border-color: red; -fx-border-width: 2px; -fx-border-radius: 5px;");
 	                    isValid = false;
 	                    Alert alert = new Alert(Alert.AlertType.ERROR, "The selected date has already passed.");
 	                    alert.showAndWait();
 	                }
 	            } catch (DateTimeParseException ex) {
-	                dateField.setStyle("-fx-border-color: red; -fx-border-width: 2px;");
+	                dateField.setStyle("-fx-border-color: red; -fx-border-width: 2px; -fx-border-radius: 5px;");
 	                isValid = false;
 	                Alert alert = new Alert(Alert.AlertType.ERROR, "Invalid date format. Please use YYYY-MM-DD.");
 	                alert.showAndWait();
@@ -417,7 +420,7 @@ public class Client extends Application {
 
 	        // Validate the "Flight Type" dropdown.
 	        if (flightTypeDropdown.getValue() == null || flightTypeDropdown.getValue().trim().isEmpty()) {
-	            flightTypeDropdown.setStyle("-fx-border-color: red; -fx-border-width: 2px;");
+	            flightTypeDropdown.setStyle("-fx-border-color: red; -fx-border-width: 2px; -fx-border-radius: 5px;");
 	            isValid = false;
 	        }
 
@@ -430,7 +433,7 @@ public class Client extends Application {
 	            int children = childrenSpinner.getValue();
 	            String type = flightTypeDropdown.getValue();
 	            type = parseFlightType(type);
-	            
+
 	            try {
 	                String[] flights = searchFlights(src, dst, date, adults, children, 0, type);
 	                showFlightSearchResults(flights);
@@ -443,7 +446,6 @@ public class Client extends Application {
 	            alert.showAndWait();
 	        }
 	    });
-
 
 	    // Add all groups to the card container
 	    cardContainer.getChildren().addAll(
@@ -464,6 +466,7 @@ public class Client extends Application {
 	    primary.setTitle("Flight Booking");
 	    primary.show();
 	}
+
 
 	private void showFlightSearchResults(String[] flights) {
 		// Main container for the page
@@ -677,41 +680,82 @@ public class Client extends Application {
 	}
 	
 	private void showUserProfile() {
-		// profile name with buttons for myflights and myfavorites which will display appropriate lists on the right 
-		// Button for myflights 
-		//main container for the user profile 
-		VBox mainContainer = new VBox();
-		mainContainer.getStyleClass().add("main-container");
-		//box for the user profile 
-		VBox cardContainer = new VBox(20);
-		cardContainer.getStyleClass().add("card-container");
-		cardContainer.setMaxWidth(500); 
-		//Title Label
-		Label userprofilelabel = new Label("User Profile: Max Gulart"); //for jacob..pull name from data base 
-		userprofilelabel.getStyleClass().add("title-label");
-		// Status label for button cases
-		Label statusLabel = new Label();
-		statusLabel.setId("status-label");
-		//myflights button
-		Button createMyFlightsButton = new Button("MyFlights");
-		createMyFlightsButton.setId("create-MyFlights-button");
-		//myfavorites button
-		Button createMyFavoritesButton = new Button("MyFavorites");
-		createMyFavoritesButton.setId("create-MyFavorites-button");
-		//press myflights button -> show the booked flights if any 
-		createMyFlightsButton.setOnAction(e -> { showUserProfile();});
-		cardContainer.getChildren().addAll(userprofilelabel, statusLabel, createMyFlightsButton);
+	    // Main container for the page
+	    VBox pageContainer = new VBox(20);
+	    pageContainer.getStyleClass().add("page-container");
 
-		mainContainer.getChildren().add(cardContainer);
-		// Set the Scene for the User Profile Page (triggered by the 
-		Scene UserProfileScene = new Scene(mainContainer, 500, 200);
-		UserProfileScene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
-		// Show User Profile Page 
-		primary.setScene(UserProfileScene);
-		primary.setTitle("User Profile: Max Gulart"); //-> for jacob..replace with user first and last name from database 
-		primary.show();
+	    // Add header to the page
+	    pageContainer.getChildren().add(createHeader("User Profile"));
+
+	    // Card container for grouping all form elements
+	    VBox cardContainer = new VBox(20);
+	    cardContainer.setId("homepage-card-container");
+	    cardContainer.setAlignment(Pos.TOP_LEFT); // Align everything to the left
+	    cardContainer.setPadding(new Insets(20));
+
+	    // User Information
+	    VBox userInfoGroup = new VBox(10);
+
+	    // First Name
+	    HBox firstNameGroup = new HBox(10); // Horizontal box for first name
+	    Label firstNameLabel = new Label("First Name: ");
+	    firstNameLabel.setStyle("-fx-font-weight: bold;");
+	    Label firstNameValue = new Label("John");
+	    firstNameGroup.getChildren().addAll(firstNameLabel, firstNameValue);
+
+	    // Last Name
+	    HBox lastNameGroup = new HBox(10); // Horizontal box for last name
+	    Label lastNameLabel = new Label("Last Name: ");
+	    lastNameLabel.setStyle("-fx-font-weight: bold;");
+	    Label lastNameValue = new Label("Doe");
+	    lastNameGroup.getChildren().addAll(lastNameLabel, lastNameValue);
+
+	    // Email
+	    HBox emailGroup = new HBox(10); // Horizontal box for email
+	    Label emailLabel = new Label("Email: ");
+	    emailLabel.setStyle("-fx-font-weight: bold;");
+	    Label emailValue = new Label("john.doe@example.com");
+	    emailGroup.getChildren().addAll(emailLabel, emailValue);
+
+	    // Add to userInfoGroup
+	    userInfoGroup.getChildren().addAll(firstNameGroup, lastNameGroup, emailGroup);
+
+	    // Flights Information (hardcoded)
+	    VBox flightsGroup = new VBox(10);
+
+	    // Upcoming Flights label in bold
+	    Label flightsLabel = new Label("Upcoming Flights:");
+	    flightsLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 18px;");
+
+	    VBox flightsList = new VBox(5);
+	    Label flight1Label = new Label("Flight 1: New York to London - 2024-12-15");
+	    Label flight2Label = new Label("Flight 2: Paris to Tokyo - 2025-01-10");
+	    Label flight3Label = new Label("Flight 3: Berlin to Sydney - 2025-03-05");
+
+	    flightsList.getChildren().addAll(flight1Label, flight2Label, flight3Label);
+
+	    flightsGroup.getChildren().addAll(flightsLabel, flightsList);
+
+	    // "Go Back" Button
+	    Button goBackButton = new Button("Go Back to Search Flights");
+	    goBackButton.setId("go-back-button");
+	    goBackButton.setOnAction(e -> showFlightBooking());  // Call showFlightBooking() to go back
+
+	    // Add all groups to the card container
+	    cardContainer.getChildren().addAll(userInfoGroup, flightsGroup, goBackButton);
+
+	    pageContainer.getChildren().add(cardContainer);
+
+	    // Set up the scene and apply styles
+	    Scene userProfileScene = new Scene(pageContainer, 1000, 600);
+	    userProfileScene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
+	    primary.setScene(userProfileScene);
+	    primary.setTitle("User Profile");
+	    primary.show();
 	}
-	
+
+
+
 	public boolean sendLoginRequest(String username, String password) {
 		try (Socket socket = new Socket(SERVER_ADDRESS, SERVER_PORT);
 			 PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
