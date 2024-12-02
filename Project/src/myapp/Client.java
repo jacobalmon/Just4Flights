@@ -41,7 +41,7 @@ public class Client extends Application {
 		showLoginPage(); // Start with Login Page.
 	}
 		
-	private void showLoginPage() {
+	public void showLoginPage() {
 		
 		// Main container for the image and login form.
 		HBox rootContainer = new HBox();
@@ -159,7 +159,7 @@ public class Client extends Application {
 		primary.show();
 	}
 	
-	private void showRegisterPage() {
+	public void showRegisterPage() {
 		
 		// Main container for the form elements
 		VBox mainContainer = new VBox();
@@ -302,7 +302,7 @@ public class Client extends Application {
 	    return header;
 	}
 	
-	private void showFlightBooking() {
+	public void showFlightBooking() {
 	    // Main container for the page
 	    VBox pageContainer = new VBox(20); // Wrap everything in a VBox
 	    pageContainer.getStyleClass().add("page-container");
@@ -471,7 +471,7 @@ public class Client extends Application {
 	    primary.show();
 	}
 
-	private void showFlightSearchResults(String[] flights) {
+	public void showFlightSearchResults(String[] flights) {
 		// Main container for the page
 	    VBox pageContainer = new VBox(20); // Wrap everything in a VBox
 	    pageContainer.getStyleClass().add("page-container");
@@ -527,7 +527,7 @@ public class Client extends Application {
 	    primary.setTitle("Search Results");
 	}
 	
-	private void showFlightDetails(String[] flights, String flight) {
+	public void showFlightDetails(String[] flights, String flight) {
 		// Main container for flight details
 	    VBox pageContainer = new VBox(20); // Wrap everything in a VBox
 	    pageContainer.getStyleClass().add("page-container");
@@ -578,7 +578,7 @@ public class Client extends Application {
 	    primary.show();
 	}
 	
-	private void showPayment(String[] flights, String flight) {
+	public void showPayment(String[] flights, String flight) {
 	    // Main container for payment and flight details
 	    VBox pageContainer = new VBox(20); // Wrap everything in a VBox
 	    pageContainer.getStyleClass().add("page-container");
@@ -681,7 +681,7 @@ public class Client extends Application {
 	    primary.show();
 	}
 	
-	private void showUserProfile() {
+	public void showUserProfile() {
 	    // Get Flights for their profile
 	    String[] flights = extractUserDetails(final_username);
 
@@ -795,7 +795,6 @@ public class Client extends Application {
 	    primary.setTitle("User Profile");
 	    primary.show();
 	}
-
 
 	public boolean sendLoginRequest(String username, String password) {
 		try (Socket socket = new Socket(SERVER_ADDRESS, SERVER_PORT);
