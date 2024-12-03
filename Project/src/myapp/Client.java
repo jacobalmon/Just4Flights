@@ -51,7 +51,7 @@ public class Client extends Application {
 		Region leftSpacer = new Region();
 		HBox.setHgrow(leftSpacer, Priority.NEVER); // Allow the spacer to grow
 		
-		ImageView imageView = new ImageView(new Image(getClass().getResourceAsStream("/cat.jpg")));
+		ImageView imageView = new ImageView(new Image(getClass().getResourceAsStream("/logo.png")));
 		imageView.setFitWidth(300); // Set preferred width for the image
 		imageView.setPreserveRatio(true); // Maintain aspect ratio
 		
@@ -729,16 +729,25 @@ public class Client extends Application {
 	    flightsLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 18px;");
 	    
 	    VBox flightsList = new VBox(5);
-	    for (String flight : flights) {
-	        // Clean up the flight string by removing quotes and escaped newlines
-	        String cleanedFlight = flight.replaceAll("\"", "").replaceAll("\\\\n", "\n").trim();
-	        
-	        // Create a label with the cleaned string for each flight
-	        Label flightLabel = new Label(cleanedFlight);
-	        
-	        // Add a separator after each flight label
-	        flightsList.getChildren().add(flightLabel);
-	        flightsList.getChildren().add(new Separator());
+	    if (flights != null) {
+	    	for (String flight : flights) {
+	    		// Clean up the flight string by removing quotes and escaped newlines
+	    		String cleanedFlight = flight.replaceAll("\"", "").replaceAll("\\\\n", "\n").trim();
+	    		
+	    		// Create a label with the cleaned string for each flight
+	    		Label flightLabel = new Label(cleanedFlight);
+	    		
+	    		// Add a separator after each flight label
+	    		flightsList.getChildren().add(flightLabel);
+	    		flightsList.getChildren().add(new Separator());
+	    	}
+	    } else {
+	    	// Create a label with the cleaned string for each flight
+    		Label flightLabel = new Label("No Flights Booked.");
+    		
+    		// Add a separator after each flight label
+    		flightsList.getChildren().add(flightLabel);
+    		flightsList.getChildren().add(new Separator());
 	    }
 
 	    // Wrap the flightsList in a ScrollPane to make it scrollable
@@ -749,7 +758,7 @@ public class Client extends Application {
 	    flightsScrollPane.setVmax(500); // Set a max height to limit the scrollable space
 
 	    // Create an ImageView to display the cat image
-	    ImageView imageView = new ImageView(new Image("cat.jpg"));  // Adjusted to the path for the cat image
+	    ImageView imageView = new ImageView(new Image("/logo.png")); //Adjusted to the path for the cat image
 	    imageView.setFitHeight(150);  // Adjust the height of the image
 	    imageView.setPreserveRatio(true);  // Maintain the aspect ratio of the image
 
@@ -938,12 +947,14 @@ public class Client extends Application {
                 String firstName = rs.getString("first_name");
                 String lastName = rs.getString("last_name");
                 String flightsJson = rs.getString("flights");
-
-                // Parse flights JSON to array
-                JSONArray jsonArray = new JSONArray(flightsJson);
-                flightsArray = new String[jsonArray.length()];
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    flightsArray[i] = jsonArray.getString(i);
+                
+                if (flightsJson != null) {
+                	// Parse flights JSON to array
+                	JSONArray jsonArray = new JSONArray(flightsJson);
+                	flightsArray = new String[jsonArray.length()];
+                	for (int i = 0; i < jsonArray.length(); i++) {
+                		flightsArray[i] = jsonArray.getString(i);
+                	}
                 }
 
                 // Set first and last names
