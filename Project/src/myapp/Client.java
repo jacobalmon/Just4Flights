@@ -219,7 +219,7 @@ public class Client extends Application {
 		statusLabel.getStyleClass().add("create-status-label");
 		
 		// Back button
-		Button backButton = new Button("â† Back to Login");
+		Button backButton = new Button("← Back to Login");
 		backButton.getStyleClass().add("back-button"); // Unique id for styling
 		backButton.setOnAction(e -> showLoginPage()); // Navigate back to the login page
 		
@@ -278,7 +278,7 @@ public class Client extends Application {
 	    leftContainer.setAlignment(Pos.CENTER_LEFT);
 
 	    // Hamburger Menu on the Right
-	    MenuButton menuButton = new MenuButton("â˜°");
+	    MenuButton menuButton = new MenuButton("☰");
 	    menuButton.setId("hamburger-menu");
 	    
 	    MenuItem profileMenuItem = new MenuItem("User Profile");
@@ -622,23 +622,50 @@ public class Client extends Application {
 	        String exp = expiryField.getText();
 	        String cvc = cvcField.getText();
 
-	        DateTimeFormatter format = DateTimeFormatter.ofPattern("MM/yy");
-	        YearMonth yearMonth = YearMonth.parse(exp, format);
-	        LocalDate expDate = yearMonth.atEndOfMonth();
-	        LocalDate curr = LocalDate.now();
+	        boolean valid = true;
 
-	        if (cardNum.length() == 16 && cvc.length() == 3 && expDate.isAfter(curr)) {
-	            // Convert the flight details array to a JSON string
-	            Gson gson = new Gson();
-	            String flightJson = gson.toJson(flight);  // Serialize flight array to JSON
+	        // Validate fields
+	        if (cardNum.isEmpty()) {
+	            cardNumberField.setStyle("-fx-border-color: red;");
+	            valid = false;
+	        }
+	        if (exp.isEmpty()) {
+	            expiryField.setStyle("-fx-border-color: red;");
+	            valid = false;
+	        }
+	        if (cvc.isEmpty()) {
+	            cvcField.setStyle("-fx-border-color: red;");
+	            valid = false;
+	        }
 
-	            // Insert or update the user's flight details in the database
-	            appendFlightDetailsToDatabase(flightJson);
-	            // Go back to the flight booking page
-	            showFlightBooking();
+	        // Validate expiration date and card number
+	        if (valid) {
+	            DateTimeFormatter format = DateTimeFormatter.ofPattern("MM/yy");
+	            try {
+	                YearMonth yearMonth = YearMonth.parse(exp, format);
+	                LocalDate expDate = yearMonth.atEndOfMonth();
+	                LocalDate curr = LocalDate.now();
+
+	                if (cardNum.length() == 16 && cvc.length() == 3 && expDate.isAfter(curr)) {
+	                    // Convert the flight details array to a JSON string
+	                    Gson gson = new Gson();
+	                    String flightJson = gson.toJson(flight);  // Serialize flight array to JSON
+
+	                    // Insert or update the user's flight details in the database
+	                    appendFlightDetailsToDatabase(flightJson);
+	                    // Go back to the flight booking page
+	                    showFlightBooking();
+	                } else {
+	                    Alert alert = new Alert(Alert.AlertType.ERROR, "Invalid card details or the expiration date has passed.");
+	                    alert.showAndWait();
+	                }
+	            } catch (DateTimeParseException ex) {
+	                Alert alert = new Alert(Alert.AlertType.ERROR, "Invalid expiration date format.");
+	                alert.showAndWait();
+	            }
 	        } else {
-	            // Show alert if any validation fails
-	            Alert alert = new Alert(Alert.AlertType.ERROR, "Invalid card details or the expiration date has passed.");
+	            // Show error message if validation fails.
+	            Alert alert = new Alert(Alert.AlertType.ERROR, "Please fill in all required fields.");
 	            alert.showAndWait();
 	        }
 	    });
