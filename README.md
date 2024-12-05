@@ -21,7 +21,7 @@ Just4Flights is a Java-based flight booking application that allows users to sea
 ## Installation
 1. Clone the repository:
     ```bash
-    git clone https://github.com/your-repo/Just4Flights.git
+    https://github.com/jacobalmon/SE-Project.git
     ```
 2. Set up the database:
     - Create a MySQL database named `just4flights`.
