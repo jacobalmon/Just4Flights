@@ -64,6 +64,3 @@ Just4Flights is a Java-based flight booking application that allows users to sea
 ## Configuration
 - **Database**: Update the credentials in `Server.java`.
 - **API Keys**: Replace the API keys in `SearchFlights.java` with your own credentials for the flight search API.
-
-## Contributing
-Contributions are welcome! Please fork the repository and create a pull request with your changes.
